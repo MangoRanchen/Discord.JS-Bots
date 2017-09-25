@@ -1,0 +1,18 @@
+{
+  "extends": "aqua",
+  "rules": {
+    "capitalized-comments": ["off"],
+    "consistent-return": ["off"],
+    "id-length": ["off"],
+    "indent": ["error", 2],
+    "max-len": ["off"],
+    "newline-per-chained-call": ["off"],
+    "no-await-in-loop": ["off"],
+    "no-console": ["off"],
+    "no-process-env": ["off"],
+    "no-useless-constructor": ["off"],
+    "operator-linebreak": ["off"],
+    "prefer-destructuring": ["off"],
+    "require-await": ["off"]
+  }
+}

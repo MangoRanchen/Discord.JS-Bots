@@ -1,0 +1,47 @@
+{
+  "name": "discord.js-bots",
+  "version": "1.0.0",
+  "description": "Discord.JS Bots",
+  "engines": {
+    "node": "latest",
+    "npm": "5.2.0"
+  },
+  "dependencies": {
+    "cleverbot-node": "^0.3.11",
+    "discord.js": "github:hydrabolt/discord.js",
+    "getos": "^3.0.1",
+    "os-toolbox": "^0.2.7",
+    "pastebin-js": "^0.4.0",
+    "randomcolor": "^0.5.3",
+    "uws": "^8.14.1"
+  },
+  "devDependencies": {
+    "eslint": "^4.7.2",
+    "eslint-config-aqua": "^2.0.1",
+    "nodemon": "^1.12.1"
+  },
+  "author": "Shayne Hartford (ShayBox)",
+  "maintainers": [
+    {
+      "name": "Shayne Hartford (ShayBox)",
+      "email": "ShayneEHartford@Gmail.Com",
+      "url": "https://shaybox.com/"
+    },
+    {
+      "name": "Yukine",
+      "url": "http://yukine.ga/"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShayBox/Discord.JS-Bots.git"
+  },
+  "license": "MIT",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/ShayBox/Discord.JS-Bots/blob/master/LICENSE"
+    }
+  ],
+  "homepage": "https://github.com/ShayBox/Discord.JS-Bots"
+}

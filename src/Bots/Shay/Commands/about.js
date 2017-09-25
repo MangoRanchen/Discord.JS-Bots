@@ -10,8 +10,8 @@ class Command extends Commands {
       cooldown: false,
       cooldownTime: 3,
       name: parse(__filename).base.replace('.js', ''),
-      description: '',
-      usage: 'Command [Required] (Optional)',
+      description: 'About the bot',
+      usage: 'About',
       aliases: ['']
     });
   }

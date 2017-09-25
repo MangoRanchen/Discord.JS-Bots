@@ -57,3 +57,9 @@ typings/
 # dotenv environment variables file
 .env
 
+# IDE/Editor directories
+.atom
+.brackets
+.eclipse
+.idea
+.vscode

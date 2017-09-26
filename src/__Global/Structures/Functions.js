@@ -1,4 +1,5 @@
 const { Client, MessageEmbed, Collection } = require(`discord.js`);
+const { readdirSync, statSync } = require(`fs`);
 const { sep, resolve } = require(`path`);
 const { inspect } = require(`util`);
 const PastebinAPI = require(`pastebin-js`);
@@ -222,17 +223,31 @@ class CustomClient extends Client {
     if (typeof text !== `string`) { text = inspect(text, { depth: 0 }); }
     text = text
       .replace(/`/g, `\`${String.fromCharCode(8203)}`)
-      .replace(/@/g, `@${String.fromCharCode(8203)}`)
-      // Client Tokens
-      .replace(process.env.Shay, SECRET)
-      // Webhook IDs & Tokens
-      // Console
-      .replace(process.env.WEBHOOK_Console_ID, SECRET)
-      .replace(process.env.WEBHOOK_Console_TOKEN, SECRET)
-      // API Keys
-      .replace(process.env.CLEVERBOT_API, SECRET)
-      .replace(process.env.GOOGLE_URL, SECRET)
-      .replace(process.env.PASTEBIN_API, SECRET);
+      .replace(/@/g, `@${String.fromCharCode(8203)}`);
+
+    // API Keys
+    for (let env in process.env) {
+      if (env.includes(`_API`)) {
+        text = text.replace(process.env[env], SECRET);
+      }
+    }
+
+    // Webhooks
+    for (let env in process.env) {
+      if (env.includes(`WEBHOOK_`)) {
+        text = text.replace(process.env[env], SECRET);
+      }
+    }
+
+    // Tokens
+    isDirectory(resolve(`../../Bots`)).forEach(dir => {
+      text = text.replace(process.env[dir], SECRET);
+    });
+
+    function isDirectory(source) {
+      return readdirSync(source).filter(name => statSync(`${source}/${name}`).isDirectory());
+    }
+
     return text;
   }
 

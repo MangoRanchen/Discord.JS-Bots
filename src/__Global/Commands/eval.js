@@ -20,9 +20,9 @@ class Command extends Commands {
     if (!client.ownerIDs.includes(message.author.id)) return;
 
     try {
-      client.successEmbed(message, args.join(` `), client.clean(eval(args.join(` `))), `js`, `js`);
+      client.successMessage(message, args.join(` `), client.clean(eval(args.join(` `))), `js`, `js`, true);
     } catch (error) {
-      client.errorEmbed(message, args.join(` `), error, `js`);
+      client.errorMessage(message, args.join(` `), error, `js`, null, true);
     }
   }
 }

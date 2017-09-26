@@ -28,11 +28,11 @@ class Command extends Commands {
       });
 
       getos((error, response) => {
-        if (error) return client.errorEmbed(message, message.content, error);
+        if (error) return client.errorMessage(message, message.content, error);
 
         exec(`npm -v`, async (error2, stdout, stderr) => {
-          if (error2) return client.errorEmbed(message, message.content, error);
-          if (stderr) return client.errorEmbed(message, message.content, stderr);
+          if (error2) return client.errorMessage(message, message.content, error);
+          if (stderr) return client.errorMessage(message, message.content, stderr);
 
           const embed = new MessageEmbed()
             .setAuthor(`GitHub Repo`, `https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png`)

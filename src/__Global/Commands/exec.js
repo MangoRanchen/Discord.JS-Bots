@@ -21,10 +21,10 @@ class Command extends Commands {
     if (!client.ownerIDs.includes(message.author.id)) return;
 
     exec(args.join(` `), { cwd: `../../` }, (err, stdout, stderr) => {
-      if (err) return client.errorEmbed(message, args.join(` `), err, `bash`);
-      if (stderr) return client.errorEmbed(message, args.join(` `), stderr, `bash`);
+      if (err) return client.errorMessage(message, args.join(` `), err, `bash`, null, true);
+      if (stderr) return client.errorMessage(message, args.join(` `), stderr, `bash`, null, true);
 
-      client.successEmbed(message, args.join(` `), stdout, `bash`);
+      client.successMessage(message, args.join(` `), stdout, `bash`);
     });
   }
 }

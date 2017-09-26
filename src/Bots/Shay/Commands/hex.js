@@ -17,7 +17,7 @@ class Command extends Commands {
   }
 
   async run(client, message, args) {
-    if (args.length < 1) return client.errorEmbed(message, message.content.replace(client.botPrefix, ``), this.usage);
+    if (args.length < 1) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
 
     if (/[0-9A-F]{6}/i.test(args)) {
       const embed = new MessageEmbed()

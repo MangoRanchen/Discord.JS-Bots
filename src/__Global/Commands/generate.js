@@ -21,7 +21,7 @@ class Command extends Commands {
 
     client.guilds.get(args.join(` `)).channels.first().createInvite({ maxAge: 1 })
       .then(invite => client.send(message, invite.url))
-      .catch(error => client.errorEmbed(message, null, error));
+      .catch(error => client.errorMessage(message, null, error));
   }
 }
 

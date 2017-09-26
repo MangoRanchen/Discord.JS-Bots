@@ -19,7 +19,7 @@ class Command extends Commands {
   }
 
   async run(client, message, args) {
-    if (args.length < 1) return client.errorEmbed(message, message.content.replace(client.botPrefix, ``), this.usage);
+    if (args.length < 1) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
 
     googl.shorten(args[0]).then(url => {
       let embed = new MessageEmbed()
@@ -30,7 +30,7 @@ class Command extends Commands {
         .setFooter(client.botName)
         .setTimestamp();
       client.send(message, { embed });
-    }).catch(error => client.errorEmbed(message, args[0], error));
+    }).catch(error => client.errorMessage(message, args[0], error));
   }
 }
 

@@ -17,7 +17,7 @@ class Command extends Commands {
   }
 
   async run(client, message, args) {
-    if (args.length < 1) return client.errorEmbed(message, message.content.replace(client.botPrefix, ``), this.usage);
+    if (args.length < 1) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
 
     const embed = new MessageEmbed()
       .setAuthor(`http://lmgtfy.com/?q=${args.join(`+`)}`, `https://i.imgur.com/Khn3Mny.png`)

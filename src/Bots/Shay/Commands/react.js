@@ -1,5 +1,4 @@
 const Commands = require(`../../../__Global/Structures/Commands`);
-const { MessageEmbed } = require(`discord.js`);
 const { parse } = require(`path`);
 
 class Command extends Commands {
@@ -17,8 +16,8 @@ class Command extends Commands {
   }
 
   async run(client, message, args) {
-    if (args.length < 1) return client.errorEmbed(message, message.content.replace(client.botPrefix, ``), this.usage);
-    if (!message.guild.me.hasPermission(`ADD_REACTIONS`) || !message.member.hasPermission(`ADD_REACTIONS`)) return client.errorEmbed(message, null, `Missing Permissions`);
+    if (args.length < 1) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
+    if (!message.guild.me.hasPermission(`ADD_REACTIONS`) || !message.member.hasPermission(`ADD_REACTIONS`)) return client.errorMessage(message, null, `Missing Permissions`);
 
     let emojis = { a: `🇦`, b: `🇧`, c: `🇨`, d: `🇩`, e: `🇪`, f: `🇫`, g: `🇬`, h: `🇭`, i: `🇮`, j: `🇯`, k: `🇰`, l: `🇱`, m: `🇲`, n: `🇳`, o: `🇴`, p: `🇵`, q: `🇶`, r: `🇷`, s: `🇸`, t: `🇹`, u: `🇺`, v: `🇻`, w: `🇼`, x: `🇽`, y: `🇾`, z: `🇿` };
 
@@ -26,7 +25,7 @@ class Command extends Commands {
       for (let char of args[0]) {
         if (emojis[char]) await quote.react(emojis[char]);
       }
-    }).catch(error => client.errorEmbed(message, args.join(` `), error));
+    }).catch(error => client.errorMessage(message, args.join(` `), error));
   }
 }
 

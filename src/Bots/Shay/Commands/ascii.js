@@ -17,10 +17,10 @@ class Command extends Commands {
   }
 
   async run(client, message, args) {
-    if (args.length < 1) return client.errorEmbed(message, message.content.replace(client.botPrefix, ``), this.usage);
+    if (args.length < 1) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
 
     asciify(args.join(` `), `standard`, (error, response) => {
-      if (error) return client.errorEmbed(message, message.content, error);
+      if (error) return client.errorMessage(message, message.content, error);
 
       client.send(message, response, { code: `` });
     });

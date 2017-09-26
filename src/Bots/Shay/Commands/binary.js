@@ -16,7 +16,7 @@ class Command extends Commands {
   }
 
   async run(client, message, args) {
-    if (args.length < 2) return client.errorEmbed(message, message.content.replace(client.botPrefix, ``), this.usage);
+    if (args.length < 2) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
 
     let action = args.shift();
     let output = null;
@@ -44,9 +44,9 @@ class Command extends Commands {
       break;
     }
 
-    if (!output) return client.errorEmbed(message, message.content, `Unknown function, encode or decode`);
+    if (!output) return client.errorMessage(message, message.content, `Unknown function, encode or decode`);
 
-    client.successEmbed(message, args.join(` `), output);
+    client.successMessage(message, args.join(` `), output);
   }
 }
 

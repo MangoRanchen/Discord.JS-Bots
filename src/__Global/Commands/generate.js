@@ -1,5 +1,5 @@
-const Commands = require('../Structures/Commands');
-const { parse } = require('path');
+const Commands = require(`../Structures/Commands`);
+const { parse } = require(`path`);
 
 class Command extends Commands {
   constructor(client) {
@@ -8,10 +8,10 @@ class Command extends Commands {
       show: false,
       cooldown: false,
       cooldownTime: 3,
-      name: parse(__filename).base.replace('.js', ''),
-      description: 'Generates an invite to the guild',
-      usage: 'Generate [GuildID]',
-      aliases: ['']
+      name: parse(__filename).base.replace(`.js`, ``),
+      description: `Generates an invite to the guild`,
+      usage: `Generate [GuildID]`,
+      aliases: [``]
     });
   }
 
@@ -19,7 +19,7 @@ class Command extends Commands {
     if (args.length < 1) return client.missingArgs(message);
     if (!client.ownerIDs.includes(message.author.id)) return;
 
-    client.guilds.get(args.join(' ')).channels.first().createInvite({ maxAge: 1 })
+    client.guilds.get(args.join(` `)).channels.first().createInvite({ maxAge: 1 })
       .then(invite => message.channel.send(invite.url))
       .catch(error => client.errorEmbed(message, null, error));
   }

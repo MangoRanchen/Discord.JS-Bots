@@ -1,5 +1,5 @@
-const Commands = require('../Structures/Commands');
-const { parse } = require('path');
+const Commands = require(`../Structures/Commands`);
+const { parse } = require(`path`);
 
 class Command extends Commands {
   constructor(client) {
@@ -8,10 +8,10 @@ class Command extends Commands {
       show: true,
       cooldown: false,
       cooldownTime: 3,
-      name: parse(__filename).base.replace('.js', ''),
-      description: 'Runs process.exit()',
-      usage: 'Exit',
-      aliases: ['process.exit()']
+      name: parse(__filename).base.replace(`.js`, ``),
+      description: `Runs process.exit()`,
+      usage: `Exit`,
+      aliases: [`process.exit()`]
     });
   }
 

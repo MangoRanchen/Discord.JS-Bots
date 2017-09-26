@@ -1,5 +1,5 @@
-const Commands = require('../Structures/Commands');
-const { parse } = require('path');
+const Commands = require(`../Structures/Commands`);
+const { parse } = require(`path`);
 
 class Command extends Commands {
   constructor(client) {
@@ -8,10 +8,10 @@ class Command extends Commands {
       show: false,
       cooldown: false,
       cooldownTime: 3,
-      name: parse(__filename).base.replace('.js', ''),
-      description: 'Lists all servers',
-      usage: 'Servers',
-      aliases: ['guilds']
+      name: parse(__filename).base.replace(`.js`, ``),
+      description: `Lists all servers`,
+      usage: `Servers`,
+      aliases: [`guilds`]
     });
   }
 
@@ -23,7 +23,7 @@ class Command extends Commands {
       servers.push(`${guild.name}\n`);
     });
 
-    client.maxLengthEmbed(message, null, servers.sort().join(''));
+    client.maxLengthEmbed(message, null, servers.sort().join(``));
   }
 }
 

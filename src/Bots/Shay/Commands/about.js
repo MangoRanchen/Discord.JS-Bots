@@ -1,6 +1,6 @@
-const Commands = require('../../../__Global/Structures/Commands');
-const { MessageEmbed } = require('discord.js');
-const { parse } = require('path');
+const Commands = require(`../../../__Global/Structures/Commands`);
+const { MessageEmbed } = require(`discord.js`);
+const { parse } = require(`path`);
 
 class Command extends Commands {
   constructor(client) {
@@ -9,17 +9,17 @@ class Command extends Commands {
       show: true,
       cooldown: false,
       cooldownTime: 3,
-      name: parse(__filename).base.replace('.js', ''),
-      description: 'About the bot',
-      usage: 'About',
-      aliases: ['']
+      name: parse(__filename).base.replace(`.js`, ``),
+      description: `About the bot`,
+      usage: `About`,
+      aliases: [``]
     });
   }
 
   async run(client, message) {
     const embed = new MessageEmbed()
-      .setTitle('Custom Bot')
-      .setDescription('I am a custom bot created by ShayBox for this guild');
+      .setTitle(`Custom Bot`)
+      .setDescription(`I am a custom bot created by ShayBox for this guild`);
     message.channel.send({ embed });
   }
 }

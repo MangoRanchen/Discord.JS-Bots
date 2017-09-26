@@ -1,4 +1,4 @@
-const Events = require('../../../__Global/Structures/Events');
+const Events = require(`../../../__Global/Structures/Events`);
 
 class Event extends Events {
   constructor(client) {
@@ -6,10 +6,10 @@ class Event extends Events {
   }
 
   async run(client, message) {
-    if (message.channel.name === 'welcome') {
+    if (message.channel.name === `welcome`) {
       message.delete({ timeout: 500 });
-      if (message.content.toLowerCase().includes('i agree')) {
-        message.member.addRole(message.guild.roles.find('name', 'Verified'));
+      if (message.content.toLowerCase().includes(`i agree`)) {
+        message.member.addRole(message.guild.roles.find(`name`, `Verified`));
       } else {
         message.member.kick();
       }

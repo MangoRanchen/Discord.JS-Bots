@@ -1,6 +1,6 @@
-const Commands = require('../../../__Global/Structures/Commands');
-const { MessageEmbed } = require('discord.js');
-const { parse } = require('path');
+const Commands = require(`../../../__Global/Structures/Commands`);
+const { MessageEmbed } = require(`discord.js`);
+const { parse } = require(`path`);
 
 class Command extends Commands {
   constructor(client) {
@@ -9,10 +9,10 @@ class Command extends Commands {
       show: true,
       cooldown: false,
       cooldownTime: 3,
-      name: parse(__filename).base.replace('.js', ''),
-      description: 'Shows server info',
-      usage: 'ServerInfo',
-      aliases: ['server']
+      name: parse(__filename).base.replace(`.js`, ``),
+      description: `Shows server info`,
+      usage: `ServerInfo`,
+      aliases: [`server`]
     });
   }
 
@@ -24,25 +24,25 @@ class Command extends Commands {
     const embed = new MessageEmbed()
       .setAuthor(`${guild.owner.user.username} (${guild.owner.user.id})`, guild.owner.user.displayAvatarURL())
 
-      .addField('Guild Name', guild.name, true)
-      .addField('Guild ID', guild.id, true)
+      .addField(`Guild Name`, guild.name, true)
+      .addField(`Guild ID`, guild.id, true)
       .addBlankField(true)
 
-      .addField('Categories', this.getChannelTypeSize(message.guild.channels, 'category'), true)
-      .addField('Text Channels', this.getChannelTypeSize(message.guild.channels, 'text'), true)
-      .addField('Voice Channels', this.getChannelTypeSize(message.guild.channels, 'voice'), true)
+      .addField(`Categories`, this.getChannelTypeSize(message.guild.channels, `category`), true)
+      .addField(`Text Channels`, this.getChannelTypeSize(message.guild.channels, `text`), true)
+      .addField(`Voice Channels`, this.getChannelTypeSize(message.guild.channels, `voice`), true)
 
-      .addField('Users', client.formatNumbers(guild.members.filter(member => !member.user.bot).size), true)
-      .addField('Bots', client.formatNumbers(guild.members.filter(member => member.user.bot).size), true)
-      .addField('Emojis', guild.emojis.size, true)
+      .addField(`Users`, client.formatNumbers(guild.members.filter(member => !member.user.bot).size), true)
+      .addField(`Bots`, client.formatNumbers(guild.members.filter(member => member.user.bot).size), true)
+      .addField(`Emojis`, guild.emojis.size, true)
 
-      .addField('Verification Level', this.resolveVerificationLevel(guild.verificationLevel), true)
-      .addField('Explicit Filter Level', this.resolveExplicitLevel(guild.explicitContentFilter), true)
-      .addField('Voice Region', guild.region.toUpperCase(), true)
+      .addField(`Verification Level`, this.resolveVerificationLevel(guild.verificationLevel), true)
+      .addField(`Explicit Filter Level`, this.resolveExplicitLevel(guild.explicitContentFilter), true)
+      .addField(`Voice Region`, guild.region.toUpperCase(), true)
 
-      .addField('Guld Creation Date', guild.createdAt)
-      .addField('Owner Creation Date', guild.owner.user.createdAt)
-      .addField('Roles (A-Z)', guild.roles.map(role => `\`${role.name}\``).sort().join('\n').replace(/@/g, ''))
+      .addField(`Guld Creation Date`, guild.createdAt)
+      .addField(`Owner Creation Date`, guild.owner.user.createdAt)
+      .addField(`Roles (A-Z)`, guild.roles.map(role => `\`${role.name}\``).sort().join(`\n`).replace(/@/g, ``))
 
       .setColor(0x00FF00)
       .setFooter(client.botName)
@@ -52,18 +52,18 @@ class Command extends Commands {
 
   resolveVerificationLevel(level) {
     return String(level)
-      .replace(0, 'None')
-      .replace(1, 'Low')
-      .replace(2, 'Medium')
-      .replace(3, '(╯°□°）╯︵ ┻━┻')
-      .replace(4, '┻━┻ ﾐヽ(ಠ益ಠ)ノ彡┻━┻');
+      .replace(0, `None`)
+      .replace(1, `Low`)
+      .replace(2, `Medium`)
+      .replace(3, `(╯°□°）╯︵ ┻━┻`)
+      .replace(4, `┻━┻ ﾐヽ(ಠ益ಠ)ノ彡┻━┻`);
   }
 
   resolveExplicitLevel(level) {
     return String(level)
-      .replace(0, 'Scan nobody')
-      .replace(1, 'Scan members without role')
-      .replace(2, 'Scan everyone');
+      .replace(0, `Scan nobody`)
+      .replace(1, `Scan members without role`)
+      .replace(2, `Scan everyone`);
   }
 
   getChannelTypeSize(channels, type) {

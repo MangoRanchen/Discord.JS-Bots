@@ -1,37 +1,37 @@
-const { Client, MessageEmbed, Collection } = require('discord.js');
-const { sep, resolve } = require('path');
-const { inspect } = require('util');
-const PastebinAPI = require('pastebin-js');
+const { Client, MessageEmbed, Collection } = require(`discord.js`);
+const { sep, resolve } = require(`path`);
+const { inspect } = require(`util`);
+const PastebinAPI = require(`pastebin-js`);
 const pastebin = new PastebinAPI(process.env.PASTEBIN_API);
 
 class CustomClient extends Client {
   constructor(options) {
     super(options);
-    this.botName = resolve('.').split(sep).slice(-1)[0];
+    this.botName = resolve(`.`).split(sep).slice(-1)[0];
     this.botPrefix = `${this.botName.toLowerCase().charAt(0)}!`;
     this.commands = new Collection();
     this.aliases = new Collection();
     this.cooldownUsers = [];
-    this.ownerIDs = ['358558305997684739'];
+    this.ownerIDs = [`358558305997684739`];
   }
 
   // Client Log/Warn/Error
   log(input) {
     console.log(input);
     if (process.env.LOCAL) return;
-    this.console(input, 'Log');
+    this.console(input, `Log`);
   }
 
   warn(input) {
     console.warn(input);
     if (process.env.LOCAL) return;
-    this.console(input, 'Warn');
+    this.console(input, `Warn`);
   }
 
   error(input) {
     console.error(input);
     if (process.env.LOCAL) return;
-    this.console(input, 'Error');
+    this.console(input, `Error`);
   }
 
   console(input, type) {
@@ -66,7 +66,7 @@ class CustomClient extends Client {
 
   // MaxLength/Error/Success Embed
   maxLengthEmbed(message, input, output, inputType, outputType) {
-    if (output.length < 2000) return this.user.bot ? message.channel.send(output, { code: outputType ? outputType : '' }) : message.edit(output, { code: outputType ? outputType : '' });
+    if (output.length < 2000) return this.user.bot ? message.channel.send(output, { code: outputType ? outputType : `` }) : message.edit(output, { code: outputType ? outputType : `` });
 
     let embed = new MessageEmbed()
       .setColor(0xFF0000)
@@ -76,19 +76,19 @@ class CustomClient extends Client {
     if (input) {
       if (inputType) {
         embed
-          .addField(':inbox_tray: Input', `\`\`\`${inputType}\n${input}\n\`\`\``);
+          .addField(`:inbox_tray: Input`, `\`\`\`${inputType}\n${input}\n\`\`\``);
       } else {
         embed
-          .addField(':inbox_tray: Input', `\`\`\`${input}\`\`\``);
+          .addField(`:inbox_tray: Input`, `\`\`\`${input}\`\`\``);
       }
     }
 
-    pastebin.createPaste(output, input, null, 1, '1D').then(data => {
+    pastebin.createPaste(output, input, null, 1, `1D`).then(data => {
       embed
-        .addField(':x: ERROR', `Output was too long, ${data}`);
+        .addField(`:x: ERROR`, `Output was too long, ${data}`);
     }).fail(error => {
       this.log(output);
-      this.errorEmbed(message, 'Pastebin Upload', error);
+      this.errorEmbed(message, `Pastebin Upload`, error);
     });
 
 
@@ -112,20 +112,20 @@ class CustomClient extends Client {
     if (input) {
       if (inputType) {
         embed
-          .addField(':inbox_tray: Input', `\`\`\`${inputType}\n${input}\n\`\`\``);
+          .addField(`:inbox_tray: Input`, `\`\`\`${inputType}\n${input}\n\`\`\``);
       } else {
         embed
-          .addField(':inbox_tray: Input', `\`\`\`${input}\`\`\``);
+          .addField(`:inbox_tray: Input`, `\`\`\`${input}\`\`\``);
       }
     }
 
     if (output) {
       if (outputType) {
         embed
-          .addField(':x: ERROR', `\`\`\`${outputType}\n${output}\n\`\`\``);
+          .addField(`:x: ERROR`, `\`\`\`${outputType}\n${output}\n\`\`\``);
       } else {
         embed
-          .addField(':x: ERROR', `\`\`\`${output}\`\`\``);
+          .addField(`:x: ERROR`, `\`\`\`${output}\`\`\``);
       }
     }
 
@@ -145,20 +145,20 @@ class CustomClient extends Client {
     if (input) {
       if (inputType) {
         embed
-          .addField(':inbox_tray: Input', `\`\`\`${inputType}\n${input}\n\`\`\``);
+          .addField(`:inbox_tray: Input`, `\`\`\`${inputType}\n${input}\n\`\`\``);
       } else {
         embed
-          .addField(':inbox_tray: Input', `\`\`\`${input}\`\`\``);
+          .addField(`:inbox_tray: Input`, `\`\`\`${input}\`\`\``);
       }
     }
 
     if (output) {
       if (outputType) {
         embed
-          .addField(':outbox_tray: Output', `\`\`\`${outputType}\n${output}\n\`\`\``);
+          .addField(`:outbox_tray: Output`, `\`\`\`${outputType}\n${output}\n\`\`\``);
       } else {
         embed
-          .addField(':outbox_tray: Output', `\`\`\`${output}\`\`\``);
+          .addField(`:outbox_tray: Output`, `\`\`\`${output}\`\`\``);
       }
     }
 
@@ -176,8 +176,8 @@ class CustomClient extends Client {
   }
 
   clean(text) {
-    let SECRET = '[SECRET!]';
-    if (typeof text !== 'string') { text = inspect(text, { depth: 0 }); }
+    let SECRET = `[SECRET!]`;
+    if (typeof text !== `string`) { text = inspect(text, { depth: 0 }); }
     text = text
       .replace(/`/g, `\`${String.fromCharCode(8203)}`)
       .replace(/@/g, `@${String.fromCharCode(8203)}`)
@@ -202,16 +202,16 @@ class CustomClient extends Client {
 
     let output = [];
 
-    let dayStr = 'd';
-    let hourStr = 'h';
-    let minuteStr = 'm';
-    let secondStr = 's';
+    let dayStr = `d`;
+    let hourStr = `h`;
+    let minuteStr = `m`;
+    let secondStr = `s`;
 
     if (toggle) {
-      dayStr = ' days';
-      hourStr = ' hours';
-      minuteStr = ' minutes';
-      secondStr = ' seconds';
+      dayStr = ` days`;
+      hourStr = ` hours`;
+      minuteStr = ` minutes`;
+      secondStr = ` seconds`;
     }
 
     if (days > 0) output.push(`${days}${dayStr}`);
@@ -219,16 +219,16 @@ class CustomClient extends Client {
     if (minutes > 0) output.push(`${minutes}${minuteStr}`);
     if (seconds > 0) output.push(`${seconds}${secondStr}`);
 
-    return output.join(' ');
+    return output.join(` `);
   }
 
   formatNumbers(input) {
-    return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, `,`);
   }
 
   defaultChannel(guild) {
     if (guild.systemChannel) return guild.systemChannel;
-    return guild.channels.find(channel => channel.permissionsFor(guild.me).has('SEND_MESSAGES'));
+    return guild.channels.find(channel => channel.permissionsFor(guild.me).has(`SEND_MESSAGES`));
   }
 }
 

@@ -1,5 +1,5 @@
-const Events = require('../../../__Global/Structures/Events');
-const { MessageEmbed } = require('discord.js');
+const Events = require(`../../../__Global/Structures/Events`);
+const { MessageEmbed } = require(`discord.js`);
 
 class Event extends Events {
   constructor(client) {
@@ -11,7 +11,7 @@ class Event extends Events {
       const embed = new MessageEmbed()
         .setAuthor(member.user.username, member.user.displayAvatarURL())
         .setColor(0xFF0000)
-        .setFooter('Left')
+        .setFooter(`Left`)
         .setTimestamp();
       webhook.send({ embed });
     });

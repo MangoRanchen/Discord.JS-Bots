@@ -1,4 +1,4 @@
-const Events = require('../../../__Global/Structures/Events');
+const Events = require(`../../../__Global/Structures/Events`);
 
 class Event extends Events {
   constructor(client) {
@@ -11,12 +11,12 @@ class Event extends Events {
     await guild.members.fetch();
 
     if (guild.memberCount - guild.members.filter(member => member.user.bot).size > 100) {
-      client.defaultChannel(guild).send('Sorry, This server has more than 100 non-bot members.');
+      client.defaultChannel(guild).send(`Sorry, This server has more than 100 non-bot members.`);
       return guild.leave();
     }
 
     if (guild.roles.size > 100) {
-      client.defaultChannel(guild).send('Sorry, This server has more than 100 roles.');
+      client.defaultChannel(guild).send(`Sorry, This server has more than 100 roles.`);
       return guild.leave();
     }
   }

@@ -1,5 +1,5 @@
-const Commands = require('../Structures/Commands');
-const { parse } = require('path');
+const Commands = require(`../Structures/Commands`);
+const { parse } = require(`path`);
 
 class Command extends Commands {
   constructor(client) {
@@ -8,10 +8,10 @@ class Command extends Commands {
       show: true,
       cooldown: false,
       cooldownTime: 3,
-      name: parse(__filename).base.replace('.js', ''),
-      description: 'Displays all the commands',
-      usage: 'Help (Command)',
-      aliases: ['?']
+      name: parse(__filename).base.replace(`.js`, ``),
+      description: `Displays all the commands`,
+      usage: `Help (Command)`,
+      aliases: [`?`]
     });
   }
 
@@ -24,11 +24,11 @@ class Command extends Commands {
         `\n` +
         `[Use ${client.botPrefix}help <commandname> for details]\n` +
         `\n` +
-        `${client.commands.map(c => c.show ? `${client.botPrefix}${c.name}${' '.repeat(longest - c.name.length)} :: ${c.description}\n` : null).join('')}`;
+        `${client.commands.map(c => c.show ? `${client.botPrefix}${c.name}${` `.repeat(longest - c.name.length)} :: ${c.description}\n` : null).join(``)}`;
       if (!client.user.bot) {
-        message.edit(content, { code: 'asciidoc' });
+        message.edit(content, { code: `asciidoc` });
       } else {
-        message.channel.send(content, { code: 'asciidoc' });
+        message.channel.send(content, { code: `asciidoc` });
       }
     } else {
       let command = args[0];
@@ -39,9 +39,9 @@ class Command extends Commands {
           `${command.description}\n` +
           `usage::${command.usage}`;
         if (!client.user.bot) {
-          message.edit(content, { code: 'asciidoc' });
+          message.edit(content, { code: `asciidoc` });
         } else {
-          message.channel.send(content, { code: 'asciidoc' });
+          message.channel.send(content, { code: `asciidoc` });
         }
       }
     }

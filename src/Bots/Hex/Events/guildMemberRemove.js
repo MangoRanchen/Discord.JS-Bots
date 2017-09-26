@@ -1,4 +1,4 @@
-const Events = require('../../../__Global/Structures/Events');
+const Events = require(`../../../__Global/Structures/Events`);
 
 class Event extends Events {
   constructor(client) {
@@ -6,7 +6,7 @@ class Event extends Events {
   }
 
   async run(client, member) {
-    let role = member.roles.find('name', `USER-${member.id}`);
+    let role = member.roles.find(`name`, `USER-${member.id}`);
 
     if (role) role.delete();
   }

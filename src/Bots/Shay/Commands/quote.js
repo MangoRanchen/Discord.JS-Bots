@@ -1,6 +1,6 @@
-const Commands = require('../../../__Global/Structures/Commands');
-const { MessageEmbed } = require('discord.js');
-const { parse } = require('path');
+const Commands = require(`../../../__Global/Structures/Commands`);
+const { MessageEmbed } = require(`discord.js`);
+const { parse } = require(`path`);
 
 class Command extends Commands {
   constructor(client) {
@@ -9,15 +9,15 @@ class Command extends Commands {
       show: true,
       cooldown: false,
       cooldownTime: 3,
-      name: parse(__filename).base.replace('.js', ''),
-      description: 'Quotes a message',
-      usage: 'Quote [MessageID] [ChannelID]',
-      aliases: ['q']
+      name: parse(__filename).base.replace(`.js`, ``),
+      description: `Quotes a message`,
+      usage: `Quote [MessageID] [ChannelID]`,
+      aliases: [`q`]
     });
   }
 
   async run(client, message, args) {
-    if (args.length < 1) return client.errorEmbed(message, message.content.replace(client.botPrefix, ''), this.usage);
+    if (args.length < 1) return client.errorEmbed(message, message.content.replace(client.botPrefix, ``), this.usage);
 
     let messageID = args[0];
     let channelID = args[1] ? args[1] : message.channel.id;
@@ -25,7 +25,7 @@ class Command extends Commands {
     client.channels.get(channelID).messages.fetch(messageID).then(quote => {
       const embed = new MessageEmbed()
         .setAuthor(quote.author.username, quote.author.displayAvatarURL())
-        .addField('Message: ', quote.content)
+        .addField(`Message: `, quote.content)
         .setColor(0x00FF00)
         .setFooter(client.botName)
         .setTimestamp();

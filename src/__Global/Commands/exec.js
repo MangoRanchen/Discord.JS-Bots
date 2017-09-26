@@ -1,6 +1,6 @@
-const Commands = require('../Structures/Commands');
-const { exec } = require('child_process');
-const { parse } = require('path');
+const Commands = require(`../Structures/Commands`);
+const { exec } = require(`child_process`);
+const { parse } = require(`path`);
 
 class Command extends Commands {
   constructor(client) {
@@ -9,10 +9,10 @@ class Command extends Commands {
       show: true,
       cooldown: false,
       cooldownTime: 3,
-      name: parse(__filename).base.replace('.js', ''),
-      description: 'Executes bash/batch commands',
-      usage: 'Exec [Command]',
-      aliases: ['']
+      name: parse(__filename).base.replace(`.js`, ``),
+      description: `Executes bash/batch commands`,
+      usage: `Exec [Command]`,
+      aliases: [``]
     });
   }
 
@@ -20,11 +20,11 @@ class Command extends Commands {
     if (args.length < 1) return client.missingArgs(message);
     if (!client.ownerIDs.includes(message.author.id)) return;
 
-    exec(args.join(' '), { cwd: '../../' }, (err, stdout, stderr) => {
-      if (err) return client.errorEmbed(message, args.join(' '), err, 'bash');
-      if (stderr) return client.errorEmbed(message, args.join(' '), stderr, 'bash');
+    exec(args.join(` `), { cwd: `../../` }, (err, stdout, stderr) => {
+      if (err) return client.errorEmbed(message, args.join(` `), err, `bash`);
+      if (stderr) return client.errorEmbed(message, args.join(` `), stderr, `bash`);
 
-      client.successEmbed(message, args.join(' '), stdout, 'bash');
+      client.successEmbed(message, args.join(` `), stdout, `bash`);
     });
   }
 }

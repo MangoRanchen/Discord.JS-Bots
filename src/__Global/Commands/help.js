@@ -25,11 +25,7 @@ class Command extends Commands {
         `[Use ${client.botPrefix}help <commandname> for details]\n` +
         `\n` +
         `${client.commands.map(c => c.show ? `${client.botPrefix}${c.name}${` `.repeat(longest - c.name.length)} :: ${c.description}\n` : null).join(``)}`;
-      if (!client.user.bot) {
-        message.edit(content, { code: `asciidoc` });
-      } else {
-        message.channel.send(content, { code: `asciidoc` });
-      }
+      client.send(message, content, { code: `asciidoc` });
     } else {
       let command = args[0];
       if (client.commands.has(command)) {
@@ -38,11 +34,7 @@ class Command extends Commands {
           `= ${command.name} = \n` +
           `${command.description}\n` +
           `usage::${command.usage}`;
-        if (!client.user.bot) {
-          message.edit(content, { code: `asciidoc` });
-        } else {
-          message.channel.send(content, { code: `asciidoc` });
-        }
+        client.send(message, content, { code: `asciidoc` });
       }
     }
   }

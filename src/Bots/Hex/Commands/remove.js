@@ -37,7 +37,7 @@ class Command extends Commands {
         .setFooter(client.botName)
         .setTimestamp();
     }
-    message.channel.send({ embed });
+    client.send(message, { embed });
   }
 }
 

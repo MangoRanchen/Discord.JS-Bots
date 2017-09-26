@@ -24,7 +24,7 @@ class Command extends Commands {
         `\`You must set the color of every role to "Default" for me to work!\`\n` +
         `\`If you would like more support join my discord\` https://discord.io/shaybox`
       );
-    message.channel.send({ embed });
+    client.send(message, { embed });
   }
 }
 

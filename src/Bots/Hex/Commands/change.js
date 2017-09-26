@@ -81,7 +81,7 @@ class Command extends Commands {
         .setColor(roleColor)
         .setFooter(client.botName)
         .setTimestamp();
-      message.channel.send({ embed });
+      client.send(message, { embed });
     } else {
       const embed = new MessageEmbed()
         .setTitle(`❌ **ERROR**`)
@@ -92,7 +92,7 @@ class Command extends Commands {
         .setColor(0xFF0000)
         .setFooter(client.botName)
         .setTimestamp();
-      message.channel.send({ embed });
+      client.send(message, { embed });
     }
   }
 }

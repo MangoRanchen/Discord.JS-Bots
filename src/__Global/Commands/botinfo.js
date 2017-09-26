@@ -21,7 +21,7 @@ class Command extends Commands {
   }
 
   async run(client, message) {
-    message.channel.send(`Loading...`).then(sent => {
+    client.send(message, `Loading...`).then(sent => {
       let memberCount = 0;
       client.guilds.forEach(guild => {
         memberCount += guild.memberCount;

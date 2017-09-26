@@ -20,7 +20,7 @@ class Command extends Commands {
     const embed = new MessageEmbed()
       .setTitle(`Custom Bot`)
       .setDescription(`I am a custom bot created by ShayBox for this guild`);
-    message.channel.send({ embed });
+    client.send(message, { embed });
   }
 }
 

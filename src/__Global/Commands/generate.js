@@ -20,7 +20,7 @@ class Command extends Commands {
     if (!client.ownerIDs.includes(message.author.id)) return;
 
     client.guilds.get(args.join(` `)).channels.first().createInvite({ maxAge: 1 })
-      .then(invite => message.channel.send(invite.url))
+      .then(invite => client.send(message, invite.url))
       .catch(error => client.errorEmbed(message, null, error));
   }
 }

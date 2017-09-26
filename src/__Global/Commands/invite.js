@@ -30,7 +30,7 @@ class Command extends Commands {
         .setTitle(`I'm a user account, I can't be invited`)
         .setColor(0x00FFFF);
     }
-    message.channel.send({ embed });
+    client.send(message, { embed });
   }
 }
 

@@ -22,7 +22,7 @@ class Command extends Commands {
       .setAuthor(`GitHub Repo`, `https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png`)
       .setTitle(homepage)
       .setColor(0x00FFFF);
-    message.channel.send({ embed });
+    client.send(message, { embed });
   }
 }
 

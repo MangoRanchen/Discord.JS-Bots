@@ -24,7 +24,7 @@ class Command extends Commands {
       randomMember = message.guild.members.random();
 
       if (randomMember !== null && !randomMember.user.bot) {
-        message.channel.send(randomMember.user.username);
+        client.send(message, randomMember.user.username);
       } else {
         pickMember();
       }

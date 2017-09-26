@@ -66,7 +66,7 @@ class CustomClient extends Client {
 
   // MaxLength/Error/Success Embed
   maxLengthEmbed(message, input, output, inputType, outputType) {
-    if (output.length < 2000) return this.user.bot ? message.channel.send(output, { code: outputType ? outputType : `` }) : message.edit(output, { code: outputType ? outputType : `` });
+    if (output.length < 2000) return this.user.bot ? client.send(message, output, { code: outputType ? outputType : `` }) : client.send(message, output, { code: outputType ? outputType : `` });
 
     let embed = new MessageEmbed()
       .setColor(0xFF0000)
@@ -93,9 +93,9 @@ class CustomClient extends Client {
 
 
     if (this.user.bot) {
-      message.channel.send({ embed });
+      client.send(message, { embed });
     } else {
-      setTimeout(() => { message.edit({ embed }); }, 500);
+      setTimeout(() => { client.send(message, { embed }); }, 500);
     }
 
     this.send(message, { embed });
@@ -167,11 +167,11 @@ class CustomClient extends Client {
     this.send(message, { embed });
   }
 
-  send(message, content) {
+  send(message, ...content) {
     if (this.user.bot) {
-      message.channel.send(content);
+      message.channel.send(...content);
     } else {
-      setTimeout(() => { message.edit(content); }, 500);
+      setTimeout(() => { message.edit(...content); }, 500);
     }
   }
 

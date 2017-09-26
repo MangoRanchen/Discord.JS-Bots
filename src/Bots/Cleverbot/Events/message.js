@@ -12,12 +12,12 @@ class Event extends Events {
     if (message.channel.name.includes(`cleverbot`)) {
       if (message.author.bot) return;
 
-      if (client.checkCooldown(message.author.id)) return message.channel.send(`Cooldown, please wait!`).then(m => m.delete({ timeout: 1000 }));
+      if (client.checkCooldown(message.author.id)) return client.send(message, `Cooldown, please wait!`).then(m => m.delete({ timeout: 1000 }));
       client.addCooldown(message.author.id, `1`);
 
       message.channel.startTyping();
       cleverbot.write(message.content, response => {
-        message.channel.send(response.output);
+        client.send(message, response.output);
         message.channel.stopTyping();
       });
     }

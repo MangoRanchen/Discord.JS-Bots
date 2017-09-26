@@ -39,7 +39,7 @@ class Command extends Commands {
       .setColor(0x00FF00)
       .setFooter(client.botName)
       .setTimestamp();
-    message.channel.send({ embed });
+    client.send(message, { embed });
   }
 
   resolveStatus(member) {

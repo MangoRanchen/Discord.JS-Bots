@@ -18,9 +18,9 @@ class Event extends Events {
     if (!command.enabled) return;
     if (client.checkCooldown(message.author.id)) {
       if (client.user.bot) {
-        return message.channel.send(`Cooldown, Please wait`);
+        return client.send(message, `Cooldown, Please wait`);
       } else {
-        return message.edit(`Cooldown, Please wait`);
+        return client.send(message, `Cooldown, Please wait`);
       }
     }
     if (command.cooldown) client.addCooldown(message.author.id, command.cooldownTime);

@@ -22,7 +22,7 @@ class Command extends Commands {
     asciify(args.join(` `), `standard`, (error, response) => {
       if (error) return client.errorEmbed(message, message.content, error);
 
-      message.channel.send(response, { code: `` });
+      client.send(message, response, { code: `` });
     });
   }
 }

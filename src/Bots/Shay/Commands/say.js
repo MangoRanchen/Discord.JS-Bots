@@ -21,7 +21,7 @@ class Command extends Commands {
     const numbers = [`zero`, `one`, `two`, `three`, `four`, `five`, `six`, `seven`, `eight`, `nine`];
 
     setTimeout(() => {
-      message.channel.send(args.join(` `)
+      client.send(message, args.join(` `)
         .replace(/[A-Z]/ig, letter => `:regional_indicator_${letter.toLowerCase()}:`)
         .replace(/[0-9]/ig, number => `:${numbers[number]}:`)
         .replace(`?`, `:grey_question:`)

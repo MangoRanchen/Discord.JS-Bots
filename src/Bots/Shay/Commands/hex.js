@@ -23,7 +23,7 @@ class Command extends Commands {
       const embed = new MessageEmbed()
         .setTitle(`#${args.join(` `).replace(`#`, ``)}`)
         .setColor(parseInt(args.join(` `).replace(`#`, ``), 16));
-      message.channel.send({ embed });
+      client.send(message, { embed });
     }
   }
 }

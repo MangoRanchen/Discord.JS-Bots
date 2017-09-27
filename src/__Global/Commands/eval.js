@@ -16,7 +16,7 @@ class Command extends Commands {
   }
 
   async run(client, message, args) {
-    if (args.length < 1) return client.missingArgs(message);
+    if (args.length < 1) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
     if (!client.ownerIDs.includes(message.author.id)) return;
 
     try {

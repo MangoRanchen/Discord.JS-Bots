@@ -30,8 +30,8 @@ class Command extends Commands {
       getos((error, response) => {
         if (error) return client.errorMessage(message, message.content, error);
 
-        exec(`npm -v`, async (error2, stdout, stderr) => {
-          if (error2) return client.errorMessage(message, message.content, error);
+        exec(`npm -v`, async (error, stdout, stderr) => {
+          if (error) return client.errorMessage(message, message.content, error);
           if (stderr) return client.errorMessage(message, message.content, stderr);
 
           const embed = new MessageEmbed()

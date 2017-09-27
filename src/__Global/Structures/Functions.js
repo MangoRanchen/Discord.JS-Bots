@@ -211,11 +211,15 @@ class CustomClient extends Client {
   }
 
   send(message, ...content) {
-    if (this.user.bot) {
-      message.channel.send(...content);
-    } else {
-      setTimeout(() => { message.edit(...content); }, 500);
-    }
+    return new Promise(async resolve => {
+      if (this.user.bot) {
+        resolve(await message.channel.send(...content));
+      } else {
+        setTimeout(() => {
+          resolve(message.edit(...content));
+        }, 500);
+      }
+    });
   }
 
   clean(text) {

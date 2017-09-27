@@ -24,7 +24,7 @@ class Command extends Commands {
       if (err) return client.errorMessage(message, args.join(` `), err, `bash`, null, true);
       if (stderr) return client.errorMessage(message, args.join(` `), stderr, `bash`, null, true);
 
-      client.successMessage(message, args.join(` `), stdout, `bash`);
+      client.successMessage(message, args.join(` `), stdout, `bash`, null, true);
     });
   }
 }

@@ -21,7 +21,9 @@ class Command extends Commands {
   }
 
   async run(client, message) {
-    client.send(message, `Loading...`).then(sent => {
+    if (!client.user.bot) message.delete({ timeout: 500 });
+
+    message.channel.send(message, `Loading...`).then(sent => {
       let memberCount = 0;
       client.guilds.forEach(guild => {
         memberCount += guild.memberCount;

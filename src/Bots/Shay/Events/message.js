@@ -6,6 +6,7 @@ class Event extends Events {
   }
 
   async run(client, message) {
+    if (message.channel.name === `bots` && message.content.startsWith(`-`)) message.delete({ timeout: 500 });
     if (message.channel.name === `welcome`) {
       message.delete({ timeout: 500 });
       if (message.content.toLowerCase().includes(`i agree`)) {

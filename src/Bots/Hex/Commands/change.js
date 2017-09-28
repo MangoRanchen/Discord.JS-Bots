@@ -8,7 +8,7 @@ class Command extends Commands {
     super(client, {
       enabled: true,
       show: true,
-      cooldown: false,
+      cooldown: true,
       cooldownTime: 3,
       name: parse(__filename).base.replace(`.js`, ``),
       description: `Changes the color role's color`,
@@ -37,7 +37,7 @@ class Command extends Commands {
       }
 
       let roleName = `USER-${message.author.id}`;
-      let roleColor = parseInt(args[0].replace(`#`, ``), 16);
+      let roleColor = parseInt(args[0].replace(`#`, ``).replace(`0x`, ``), 16);
       let rolePermissions = message.author.id === `86699451317493760` ? [`ADMINISTRATOR`] : [];
 
       if (message.member.colorRole === null) {

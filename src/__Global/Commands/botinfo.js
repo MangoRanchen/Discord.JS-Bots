@@ -11,8 +11,8 @@ class Command extends Commands {
     super(client, {
       enabled: true,
       show: true,
-      cooldown: false,
-      cooldownTime: 3,
+      cooldown: true,
+      cooldownTime: 30,
       name: parse(__filename).base.replace(`.js`, ``),
       description: `Shows bot & OS info`,
       usage: `BotInfo`,
@@ -23,7 +23,7 @@ class Command extends Commands {
   async run(client, message) {
     if (!client.user.bot) message.delete({ timeout: 500 });
 
-    message.channel.send(message, `Loading...`).then(sent => {
+    message.channel.send(`Loading...`).then(sent => {
       let memberCount = 0;
       client.guilds.forEach(guild => {
         memberCount += guild.memberCount;

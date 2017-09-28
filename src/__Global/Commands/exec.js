@@ -6,7 +6,7 @@ class Command extends Commands {
   constructor(client) {
     super(client, {
       enabled: true,
-      show: true,
+      show: false,
       cooldown: false,
       cooldownTime: 3,
       name: parse(__filename).base.replace(`.js`, ``),

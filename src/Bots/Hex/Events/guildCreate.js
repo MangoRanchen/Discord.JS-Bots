@@ -10,6 +10,8 @@ class Event extends Events {
 
     await guild.members.fetch();
 
+    if (guild.id === `110373943822540800`) return;
+
     if (guild.memberCount - guild.members.filter(member => member.user.bot).size > 100) {
       client.defaultChannel(guild).send(`Sorry, This server has more than 100 non-bot members.`);
       return guild.leave();

@@ -17,7 +17,7 @@ class Event extends Events {
     if (!command) return;
     if (!command.enabled) return;
     if (client.checkCooldown(message.author.id, commandName)) {
-      return client.send(message, `Cooldown, Please wait`).then(m => m.delete({ timeout: 1000 * 5 }));
+      return client.send(message, `Cooldown, Please wait ${command.cooldownTime}seconds from the last use.`).then(m => m.delete({ timeout: 1000 * 5 }));
     }
     if (command.cooldown) client.addCooldown(message.author.id, commandName, command.cooldownTime);
     if (message.author === client.user) client.addCooldown(message.author.id, 1);

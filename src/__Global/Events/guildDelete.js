@@ -12,7 +12,7 @@ class Event extends Events {
       const embed = new MessageEmbed()
         .setAuthor(guild.name, guild.iconURL())
         .setColor(0x00FF00)
-        .setFooter(`Joined`)
+        .setFooter(`Left`)
         .setTimestamp();
       webhook.send({ embed });
     });

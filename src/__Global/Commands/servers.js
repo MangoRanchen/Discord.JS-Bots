@@ -23,7 +23,7 @@ class Command extends Commands {
       servers.push(`${guild.name}\n`);
     });
 
-    client.maxLengthEmbed(message, null, servers.sort().join(``));
+    client.maxLength(message, null, servers.sort().join(``));
   }
 }
 

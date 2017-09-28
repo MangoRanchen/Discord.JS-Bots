@@ -9,7 +9,7 @@ class Command extends Commands {
       enabled: true,
       show: true,
       cooldown: true,
-      cooldownTime: 3,
+      cooldownTime: 60,
       name: parse(__filename).base.replace(`.js`, ``),
       description: `Changes the color role's color`,
       usage: `Change [Hex Value or RANDOM]`,

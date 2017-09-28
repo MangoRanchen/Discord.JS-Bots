@@ -67,7 +67,7 @@ class CustomClient extends Client {
 
   // MaxLength/Error/Success Embed
   async maxLengthMessage(message, input, output, inputType, outputType, embedToggle) {
-    if (input.length < 2000 && output.length < 2000) {
+    if (input && output && input.length < 2000 && output.length < 2000) {
       await this.send(message, input, { code: inputType });
       await this.send(message, output, { code: outputType });
     } else if (!embedToggle) {

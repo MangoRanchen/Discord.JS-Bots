@@ -12,7 +12,7 @@ class CustomClient extends Client {
     this.botPrefix = `${this.botName.toLowerCase().charAt(0)}!`;
     this.commands = new Collection();
     this.aliases = new Collection();
-    this.cooldownUsers = [];
+    this.cooldown = [];
     this.ownerIDs = [`358558305997684739`];
   }
 
@@ -47,22 +47,22 @@ class CustomClient extends Client {
   }
 
   // Add/Remove/Check Cooldown
-  removeCooldown(userID, time) {
-    let index = this.cooldownUsers.indexOf(userID);
+  removeCooldown(userID, commandName, time) {
+    let index = this.cooldown.indexOf(userID + commandName);
     if (index > -1) {
       setTimeout(() => {
-        this.cooldownUsers = this.cooldownUsers.splice(index, 0);
+        this.cooldown = this.cooldown.splice(index, 0);
       }, time * 1000);
     }
   }
 
-  addCooldown(userID, time) {
-    this.cooldownUsers.push(userID);
-    this.removeCooldown(userID, time);
+  addCooldown(userID, commandName, time) {
+    this.cooldown.push(userID + commandName);
+    this.removeCooldown(userID, commandName, time);
   }
 
-  checkCooldown(userID) {
-    return this.cooldownUsers.indexOf(userID) > -1;
+  checkCooldown(userID, commandName) {
+    return this.cooldown.indexOf(userID + commandName) > -1;
   }
 
   // MaxLength/Error/Success Embed

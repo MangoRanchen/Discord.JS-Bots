@@ -16,14 +16,10 @@ class Event extends Events {
 
     if (!command) return;
     if (!command.enabled) return;
-    if (client.checkCooldown(message.author.id)) {
-      if (client.user.bot) {
-        return client.send(message, `Cooldown, Please wait`);
-      } else {
-        return client.send(message, `Cooldown, Please wait`);
-      }
+    if (client.checkCooldown(message.author.id, commandName)) {
+      return client.send(message, `Cooldown, Please wait`).then(m => m.delete({ timeout: 1000 * 5 }));
     }
-    if (command.cooldown) client.addCooldown(message.author.id, command.cooldownTime);
+    if (command.cooldown) client.addCooldown(message.author.id, commandName, command.cooldownTime);
     if (message.author === client.user) client.addCooldown(message.author.id, 1);
 
     command.run(client, message, args);

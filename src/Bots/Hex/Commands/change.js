@@ -17,7 +17,7 @@ class Command extends Commands {
     });
   }
 
-  async run(client, message, args) {
+  run(client, message, args) {
     if (args.length < 1) args.push(randomColor());
     if (args[0].toLowerCase().includes(`random`)) args[0] = randomColor();
 

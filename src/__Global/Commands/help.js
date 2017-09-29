@@ -15,7 +15,7 @@ class Command extends Commands {
     });
   }
 
-  async run(client, message, args) {
+  run(client, message, args) {
     if (args.length < 1) {
       const commandNames = Array.from(client.commands.keys());
       const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);

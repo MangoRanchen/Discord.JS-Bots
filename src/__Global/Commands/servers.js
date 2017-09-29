@@ -15,7 +15,7 @@ class Command extends Commands {
     });
   }
 
-  async run(client, message) {
+  run(client, message) {
     if (!client.ownerIDs.includes(message.author.id)) return client.errorMessage(message, null, `Sorry, you do not have permission for this command`);
 
     let servers = [];

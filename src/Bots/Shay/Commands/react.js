@@ -15,7 +15,7 @@ class Command extends Commands {
     });
   }
 
-  async run(client, message, args) {
+  run(client, message, args) {
     if (args.length < 1) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
     if (!message.guild.me.hasPermission(`ADD_REACTIONS`) || !message.member.hasPermission(`ADD_REACTIONS`)) return client.errorMessage(message, null, `Missing Permissions`);
 
@@ -23,7 +23,7 @@ class Command extends Commands {
 
     message.channel.messages.fetch(message).then(async quote => {
       for (let char of args[0]) {
-        if (emojis[char]) await quote.react(emojis[char]);
+        if (emojis[char]) await quote.react(emojis[char]); // eslint-disable-line no-await-in-loop
       }
     }).catch(error => client.errorMessage(message, args.join(` `), error));
   }

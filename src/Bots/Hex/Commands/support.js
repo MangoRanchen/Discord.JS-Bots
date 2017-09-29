@@ -16,7 +16,7 @@ class Command extends Commands {
     });
   }
 
-  async run(client, message) {
+  run(client, message) {
     const embed = new MessageEmbed()
       .setTitle(`Thank you for inviting me to your server!`)
       .setDescription(`` +

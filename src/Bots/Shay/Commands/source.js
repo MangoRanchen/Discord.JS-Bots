@@ -17,7 +17,7 @@ class Command extends Commands {
     });
   }
 
-  async run(client, message) {
+  run(client, message) {
     const embed = new MessageEmbed()
       .setAuthor(`GitHub Repo`, `https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png`)
       .setTitle(homepage)

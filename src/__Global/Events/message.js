@@ -1,11 +1,7 @@
 const Events = require(`../Structures/Events`);
 
 class Event extends Events {
-  constructor(client) {
-    super(client);
-  }
-
-  async run(client, message) {
+  run(client, message) {
     if (message.author.bot) return;
     if (!client.user.bot && !client.ownerIDs.includes(message.author.id)) return;
     if (message.content.toLowerCase().indexOf(client.botPrefix) !== 0) return;

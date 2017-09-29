@@ -1,11 +1,7 @@
 const Events = require(`../Structures/Events`);
 
 class Event extends Events {
-  constructor(client) {
-    super(client);
-  }
-
-  async run(client) {
+  run(client) {
     console.log(client.user.username);
 
     if (client.user.bot) {

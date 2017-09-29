@@ -2,10 +2,6 @@ const Events = require(`../Structures/Events`);
 const { MessageEmbed } = require(`discord.js`);
 
 class Event extends Events {
-  constructor(client) {
-    super(client);
-  }
-
   run(client, guild) {
     if (process.env.LOCAL) return;
     client.fetchWebhook(process.env.WEBHOOK_GuildLog_ID, process.env.WEBHOOK_GuildLog_TOKEN).then(webhook => {

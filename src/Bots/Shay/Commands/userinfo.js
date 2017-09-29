@@ -16,7 +16,7 @@ class Command extends Commands {
     });
   }
 
-  async run(client, message, args) {
+  run(client, message, args) {
     if (message.mentions.members.array().size) {
       message.member = message.mentions.members.first();
     } else {

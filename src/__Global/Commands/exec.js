@@ -16,7 +16,7 @@ class Command extends Commands {
     });
   }
 
-  async run(client, message, args) {
+  run(client, message, args) {
     if (!client.ownerIDs.includes(message.author.id)) return client.errorMessage(message, null, `Sorry, you do not have permission for this command`);
     if (args.length < 1) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
 

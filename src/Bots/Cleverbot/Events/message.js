@@ -4,11 +4,7 @@ const cleverbot = new Cleverbot;
 cleverbot.configure({ botapi: process.env.CLEVERBOT_API });
 
 class Event extends Events {
-  constructor(client) {
-    super(client);
-  }
-
-  async run(client, message) {
+  run(client, message) {
     if (message.channel.name.includes(`cleverbot`)) {
       if (message.author.bot) return;
 

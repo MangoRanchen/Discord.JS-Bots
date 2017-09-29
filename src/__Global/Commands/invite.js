@@ -16,7 +16,7 @@ class Command extends Commands {
     });
   }
 
-  async run(client, message) {
+  run(client, message) {
     let embed = new MessageEmbed();
 
     if (client.user.bot) {

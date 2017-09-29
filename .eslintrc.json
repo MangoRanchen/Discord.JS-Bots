@@ -1,19 +1,15 @@
 {
-  "extends": "aqua",
+  "extends": "aqua/2space",
   "rules": {
     "capitalized-comments": ["off"],
     "consistent-return": ["off"],
     "id-length": ["off"],
-    "indent": ["error", 2],
     "max-len": ["off"],
     "newline-per-chained-call": ["off"],
-    "no-await-in-loop": ["off"],
     "no-console": ["off"],
     "no-process-env": ["off"],
     "no-shadow": ["off"],
-    "no-useless-constructor": ["off"],
-    "operator-linebreak": ["off"],
-    "quotes": ["error", "backtick"],
-    "require-await": ["off"]
+    "operator-linebreak": ["error", "after"],
+    "quotes": ["error", "backtick"]
   }
 }

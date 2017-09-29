@@ -1,10 +1,6 @@
 const Events = require(`../../../__Global/Structures/Events`);
 
 class Event extends Events {
-  constructor(client) {
-    super(client);
-  }
-
   async run(client, guild) {
     client.log(`${client.botName} Has joined ${guild.name}`);
 

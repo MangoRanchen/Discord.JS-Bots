@@ -15,7 +15,7 @@ class Command extends Commands {
     });
   }
 
-  async run(client, message) {
+  run(client, message) {
     let randomMember = null;
 
     pickMember();

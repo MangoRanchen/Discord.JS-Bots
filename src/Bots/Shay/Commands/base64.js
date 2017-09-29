@@ -15,20 +15,20 @@ class Command extends Commands {
     });
   }
 
-  async run(client, message, args) {
+  run(client, message, args) {
     if (args.length < 2) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
 
     let action = args.shift();
     let output = null;
 
     switch (action.toLowerCase()) {
-    case `encode`:
-      output = Buffer.from(args.join(` `)).toString(`base64`);
-      break;
+      case `encode`:
+        output = Buffer.from(args.join(` `)).toString(`base64`);
+        break;
 
-    case `decode`:
-      output = Buffer.from(args.join(` `), `base64`).toString(`ascii`);
-      break;
+      case `decode`:
+        output = Buffer.from(args.join(` `), `base64`).toString(`ascii`);
+        break;
     }
 
     if (output === null) return client.errorMessage(message, message.content, `Unknown function, encode or decode`);

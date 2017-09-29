@@ -16,7 +16,7 @@ class Command extends Commands {
     });
   }
 
-  async run(client, message) {
+  run(client, message) {
     let role = message.member.roles.find(`name`, `USER-${message.member.id}`);
 
     let embed = new MessageEmbed();

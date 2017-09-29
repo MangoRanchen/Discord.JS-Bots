@@ -15,7 +15,7 @@ class Command extends Commands {
     });
   }
 
-  async run(client, message, args) {
+  run(client, message, args) {
     if (args.length < 2) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
 
     client.successMessage(message, message.content, Math.round((Math.random() * args[1]) + args[0]));

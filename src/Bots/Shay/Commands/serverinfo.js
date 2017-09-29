@@ -17,32 +17,30 @@ class Command extends Commands {
   }
 
   async run(client, message) {
-    const guild = message.guild;
-
-    await guild.members.fetch();
+    await message.guild.members.fetch();
 
     const embed = new MessageEmbed()
-      .setAuthor(`${guild.owner.user.username} (${guild.owner.user.id})`, guild.owner.user.displayAvatarURL())
+      .setAuthor(`${message.guild.owner.user.username} (${message.guild.owner.user.id})`, message.guild.owner.user.displayAvatarURL())
 
-      .addField(`Guild Name`, guild.name, true)
-      .addField(`Guild ID`, guild.id, true)
+      .addField(`Guild Name`, message.guild.name, true)
+      .addField(`Guild ID`, message.guild.id, true)
       .addBlankField(true)
 
       .addField(`Categories`, this.getChannelTypeSize(message.guild.channels, `category`), true)
       .addField(`Text Channels`, this.getChannelTypeSize(message.guild.channels, `text`), true)
       .addField(`Voice Channels`, this.getChannelTypeSize(message.guild.channels, `voice`), true)
 
-      .addField(`Users`, client.formatNumbers(guild.members.filter(member => !member.user.bot).size), true)
-      .addField(`Bots`, client.formatNumbers(guild.members.filter(member => member.user.bot).size), true)
-      .addField(`Emojis`, guild.emojis.size, true)
+      .addField(`Users`, client.formatNumbers(message.guild.members.filter(member => !member.user.bot).size), true)
+      .addField(`Bots`, client.formatNumbers(message.guild.members.filter(member => member.user.bot).size), true)
+      .addField(`Emojis`, message.guild.emojis.size, true)
 
-      .addField(`Verification Level`, this.resolveVerificationLevel(guild.verificationLevel), true)
-      .addField(`Explicit Filter Level`, this.resolveExplicitLevel(guild.explicitContentFilter), true)
-      .addField(`Voice Region`, guild.region.toUpperCase(), true)
+      .addField(`Verification Level`, this.resolveVerificationLevel(message.guild.verificationLevel), true)
+      .addField(`Explicit Filter Level`, this.resolveExplicitLevel(message.guild.explicitContentFilter), true)
+      .addField(`Voice Region`, message.guild.region.toUpperCase(), true)
 
-      .addField(`Guld Creation Date`, guild.createdAt)
-      .addField(`Owner Creation Date`, guild.owner.user.createdAt)
-      .addField(`Roles (A-Z)`, guild.roles.map(role => `\`${role.name}\``).sort().join(`\n`).replace(/@/g, ``))
+      .addField(`Guld Creation Date`, message.guild.createdAt)
+      .addField(`Owner Creation Date`, message.guild.owner.user.createdAt)
+      .addField(`Roles (A-Z)`, message.guild.roles.map(role => `\`${role.name}\``).sort().join(`\n`).replace(/@/g, ``))
 
       .setColor(0x00FF00)
       .setFooter(client.botName)

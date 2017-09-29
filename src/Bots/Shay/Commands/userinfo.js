@@ -17,25 +17,24 @@ class Command extends Commands {
   }
 
   async run(client, message, args) {
-    let member = message.member;
     if (message.mentions.members.array().size) {
-      member = message.mentions.members.first();
+      message.member = message.mentions.members.first();
     } else {
-      member = message.guild.members.get(args[0]);
+      message.member = message.guild.members.get(args[0]);
     }
 
     const embed = new MessageEmbed()
-      .addField(`User Name`, member.user.username, true)
-      .addField(`Guild Nickname`, member.nickname === null ? `No Nickname` : member.nickname, true)
+      .addField(`User Name`, message.member.user.username, true)
+      .addField(`Guild Nickname`, message.member.nickname === null ? `No Nickname` : message.member.nickname, true)
 
-      .addField(`Status`, this.resolveStatus(member), true)
-      .addField(`Game`, member.presence.game ? member.presence.game.name : `None`, true)
+      .addField(`Status`, this.resolveStatus(message.member), true)
+      .addField(`Game`, message.member.presence.game ? message.member.presence.game.name : `None`, true)
 
       .addField(`Roles (A-Z)`, message.member.roles.map(role => `\`${role.name}\``).sort().join(`\n`).replace(/@/g, ``))
-      .addField(`Server Join Date`, member.joinedAt)
-      .addField(`Account Creation Date`, member.user.createdAt)
+      .addField(`Server Join Date`, message.member.joinedAt)
+      .addField(`Account Creation Date`, message.member.user.createdAt)
 
-      .setThumbnail(member.user.displayAvatarURL())
+      .setThumbnail(message.member.user.displayAvatarURL())
       .setColor(0x00FF00)
       .setFooter(client.botName)
       .setTimestamp();

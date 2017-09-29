@@ -8,7 +8,7 @@ const pastebin = new PastebinAPI(process.env.PASTEBIN_API);
 class CustomClient extends Client {
   constructor(options) {
     super(options);
-    this.botName = resolve(`.`).split(sep).slice(-1)[0];
+    [this.botName] = resolve(`.`).split(sep).slice(-1);
     this.botPrefix = `${this.botName.toLowerCase().charAt(0)}!`;
     this.commands = new Collection();
     this.aliases = new Collection();

@@ -13,7 +13,6 @@
     "no-shadow": ["off"],
     "no-useless-constructor": ["off"],
     "operator-linebreak": ["off"],
-    "prefer-destructuring": ["off"],
     "quotes": ["error", "backtick"],
     "require-await": ["off"]
   }

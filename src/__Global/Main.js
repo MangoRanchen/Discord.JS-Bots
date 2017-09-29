@@ -99,6 +99,7 @@ readdir(join(`.`, `./Events/`), (error, files) => {
 
 process.on(`uncaughtException`, error => {
   client.error(error.stack.replace(new RegExp(`${__dirname}/`, `g`), `./`));
+  process.exit();
 });
 
 process.on(`unhandledRejection`, error => {

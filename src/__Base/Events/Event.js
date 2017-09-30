@@ -1,8 +1,8 @@
 const Events = require(`../../../__Global/Structures/Events`);
 
 class Event extends Events {
-  run() {
-    // Code
+  run(client) {
+    if (process.env.LOCAL) return;
   }
 }
 

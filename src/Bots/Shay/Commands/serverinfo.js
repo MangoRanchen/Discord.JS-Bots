@@ -20,7 +20,7 @@ class Command extends Commands {
     await message.guild.members.fetch();
 
     const embed = new MessageEmbed()
-      .setAuthor(`${message.guild.owner.user.username} (${message.guild.owner.user.id})`, message.guild.owner.user.displayAvatarURL())
+      .setAuthor(`Owner: ${message.guild.owner.user.username} (ID: ${message.guild.owner.user.id})`, message.guild.owner.user.displayAvatarURL())
 
       .addField(`Guild Name`, message.guild.name, true)
       .addField(`Guild ID`, message.guild.id, true)

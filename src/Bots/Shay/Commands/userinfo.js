@@ -17,7 +17,7 @@ class Command extends Commands {
   }
 
   run(client, message, args) {
-    if (message.mentions.members.array().size) {
+    if (message.mentions.members.size > 0) {
       message.member = message.mentions.members.first();
     } else {
       message.member = message.guild.members.get(args[0]);
@@ -27,12 +27,12 @@ class Command extends Commands {
       .addField(`User Name`, message.member.user.username, true)
       .addField(`Guild Nickname`, message.member.nickname === null ? `No Nickname` : message.member.nickname, true)
 
-      .addField(`Status`, this.resolveStatus(message.member), true)
+      .addField(`Status`, this.resolveStatus(message.author), true)
       .addField(`Game`, message.member.presence.game ? message.member.presence.game.name : `None`, true)
 
-      .addField(`Roles (A-Z)`, message.member.roles.map(role => `\`${role.name}\``).sort().join(`\n`).replace(/@/g, ``))
       .addField(`Server Join Date`, message.member.joinedAt)
       .addField(`Account Creation Date`, message.member.user.createdAt)
+      .addField(`Roles (A-Z)`, message.member.roles.map(role => `\`${role.name}\``).sort().join(`\n`).replace(/@/g, ``))
 
       .setThumbnail(message.member.user.displayAvatarURL())
       .setColor(0x00FF00)
@@ -41,8 +41,8 @@ class Command extends Commands {
     client.send(message, { embed });
   }
 
-  resolveStatus(member) {
-    member.user.presence.status
+  resolveStatus(user) {
+    return user.presence.status
       .replace(`online`, `Online`)
       .replace(`offline`, `Offline`)
       .replace(`idle`, `Away`)

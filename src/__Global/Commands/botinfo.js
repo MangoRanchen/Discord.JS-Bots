@@ -20,7 +20,7 @@ class Command extends Commands {
     });
   }
 
-  async run(client, message) {
+  run(client, message) {
     if (!client.user.bot) message.delete({ timeout: 500 });
 
     message.channel.send(`Loading...`).then(sent => {

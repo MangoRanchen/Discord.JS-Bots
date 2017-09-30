@@ -36,14 +36,12 @@ class CustomClient extends Client {
   }
 
   console(input, type) {
-    this.fetchWebhook(process.env.WEBHOOK_Console_ID, process.env.WEBHOOK_Console_TOKEN).then(webhook => {
-      const embed = new MessageEmbed()
-        .setDescription(input)
-        .setColor(0x00FF00)
-        .setFooter(`${type} | ${this.botName}`)
-        .setTimestamp();
-      webhook.send({ embed });
-    });
+    const embed = new MessageEmbed()
+      .setDescription(input)
+      .setColor(0x00FF00)
+      .setFooter(`${type} | ${this.botName}`)
+      .setTimestamp();
+    this.channels.get(`361533828520476684`).send({ embed });
   }
 
   // Add/Remove/Check Cooldown

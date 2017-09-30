@@ -1,5 +1,5 @@
 const Commands = require(`../../../__Global/Structures/Commands`);
-const { username, profile } = require(`mojang`);
+const { username } = require(`mojang`);
 const { MessageEmbed } = require(`discord.js`);
 const { parse } = require(`path`);
 
@@ -21,11 +21,11 @@ class Command extends Commands {
     if (args.length < 1) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
     if (args[0] < 3) return client.errorMessage(message, null, `Please input a valid Name or UUID`);
 
-    const Player = await username(args[0]);
+    const resolveName = await username(args[0]);
 
     const embed = new MessageEmbed()
-      .setAuthor(Player.name, `https://visage.surgeplay.com/face/${Player.id}`)
-      .setImage(`https://visage.surgeplay.com/full/${Player.id}`)
+      .setAuthor(`${resolveName.name} (UUID: ${resolveName.id})`, `https://visage.surgeplay.com/face/${resolveName.id}`)
+      .setImage(`https://visage.surgeplay.com/full/512/${resolveName.id}`)
       .setColor(0x00FF00)
       .setFooter(client.botName)
       .setTimestamp();

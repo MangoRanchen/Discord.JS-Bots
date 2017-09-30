@@ -12,14 +12,14 @@ class Command extends Commands {
       cooldownTime: 3,
       name: parse(__filename).base.replace(`.js`, ``),
       description: `Player info`,
-      usage: `Minecraft [Name/UUID]`,
+      usage: `Minecraft [Name]`,
       aliases: [`mc`]
     });
   }
 
   async run(client, message, args) {
     if (args.length < 1) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
-    if (args[0] < 3) return client.errorMessage(message, null, `Please input a valid Name or UUID`);
+    if (args[0] < 3 || args[0] > 32) return client.errorMessage(message, null, `Please input a valid Name`);
 
     const resolveName = await username(args[0]);
 

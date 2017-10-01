@@ -21,7 +21,7 @@ class Command extends Commands {
     if (args.length < 1) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
     if (args[0] < 3 || args[0] > 32) return client.errorMessage(message, null, `Please input a valid Name`);
 
-    const resolveName = await username(args[0]);
+    const resolveName = await username(args[0]).catch(() => client.errorMessage(message, null, `Invalid Name or UUID`));
 
     const embed = new MessageEmbed()
       .setAuthor(`${resolveName.name} (UUID: ${resolveName.id})`, `https://visage.surgeplay.com/face/${resolveName.id}`)

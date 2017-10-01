@@ -25,7 +25,7 @@ class Command extends Commands {
 
     const embed = new MessageEmbed()
       .addField(`User Name`, message.member.user.username, true)
-      .addField(`Guild Nickname`, message.member.nickname ? message.member.nickname : `No Nickname`, true)
+      .addField(`Guild Nickname`, message.member.nickname ? message.member.nickname : `None`, true)
 
       .addField(`Status`, this.resolveStatus(message.author), true)
       .addField(`Game`, message.member.presence.game ? message.member.presence.game.name : `None`, true)

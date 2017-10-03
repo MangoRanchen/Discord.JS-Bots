@@ -14,7 +14,7 @@ class Command extends Commands {
       name: parse(__filename).base.replace(`.js`, ``),
       description: `Evaluates javascript code`,
       usage: `Eval [Code]`,
-      aliases: [``]
+      aliases: []
     });
   }
 

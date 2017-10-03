@@ -12,7 +12,7 @@ class Command extends Commands {
       name: parse(__filename).base.replace(`.js`, ``),
       description: `Responds message and heartbeat ping`,
       usage: `Ping`,
-      aliases: [``]
+      aliases: []
     });
   }
 

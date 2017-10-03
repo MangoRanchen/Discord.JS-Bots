@@ -12,7 +12,7 @@ class Command extends Commands {
       name: parse(__filename).base.replace(`.js`, ``),
       description: `Deletes color role`,
       usage: `Remove`,
-      aliases: [``]
+      aliases: []
     });
   }
 

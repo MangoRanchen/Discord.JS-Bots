@@ -13,7 +13,7 @@ class Command extends Commands {
       name: parse(__filename).base.replace(`.js`, ``),
       description: `Shortens the URL`,
       usage: `Short [URL]`,
-      aliases: [``]
+      aliases: []
     });
   }
 

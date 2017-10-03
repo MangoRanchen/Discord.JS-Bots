@@ -12,7 +12,7 @@ class Command extends Commands {
       name: parse(__filename).base.replace(`.js`, ``),
       description: `Converts the text to an ascii`,
       usage: `Ascii [Text]`,
-      aliases: [``]
+      aliases: []
     });
   }
 

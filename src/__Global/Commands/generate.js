@@ -11,7 +11,7 @@ class Command extends Commands {
       name: parse(__filename).base.replace(`.js`, ``),
       description: `Generates an invite to the guild`,
       usage: `Generate [GuildID]`,
-      aliases: [``]
+      aliases: []
     });
   }
 

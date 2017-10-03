@@ -15,7 +15,7 @@ class Command extends Commands {
       name: parse(__filename).base.replace(`.js`, ``),
       description: `Executes bash/batch commands`,
       usage: `Exec [Command]`,
-      aliases: [``]
+      aliases: []
     });
   }
 

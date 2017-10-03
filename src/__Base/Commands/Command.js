@@ -11,7 +11,7 @@ class Command extends Commands {
       name: parse(__filename).base.replace(`.js`, ``),
       description: ``,
       usage: `Command [Required] (Optional)`,
-      aliases: [``]
+      aliases: []
     });
   }
 

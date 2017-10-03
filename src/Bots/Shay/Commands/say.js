@@ -11,7 +11,7 @@ class Command extends Commands {
       name: parse(__filename).base.replace(`.js`, ``),
       description: `Converts text into emojis`,
       usage: `Say [Text]`,
-      aliases: [``]
+      aliases: []
     });
   }
 

@@ -11,7 +11,7 @@ class Command extends Commands {
       name: parse(__filename).base.replace(`.js`, ``),
       description: `Toggles the NSFW channels`,
       usage: `NSFW`,
-      aliases: [``]
+      aliases: []
     });
   }
 

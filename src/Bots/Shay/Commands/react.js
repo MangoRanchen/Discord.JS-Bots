@@ -21,7 +21,7 @@ class Command extends Commands {
 
     let emojis = { a: `🇦`, b: `🇧`, c: `🇨`, d: `🇩`, e: `🇪`, f: `🇫`, g: `🇬`, h: `🇭`, i: `🇮`, j: `🇯`, k: `🇰`, l: `🇱`, m: `🇲`, n: `🇳`, o: `🇴`, p: `🇵`, q: `🇶`, r: `🇷`, s: `🇸`, t: `🇹`, u: `🇺`, v: `🇻`, w: `🇼`, x: `🇽`, y: `🇾`, z: `🇿` };
 
-    for (let char of args[0]) {
+    for (let char of args.join(` `)) {
       if (emojis[char]) await message.react(emojis[char]); // eslint-disable-line no-await-in-loop
     }
   }

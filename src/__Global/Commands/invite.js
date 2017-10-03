@@ -12,7 +12,7 @@ class Command extends Commands {
       name: parse(__filename).base.replace(`.js`, ``),
       description: `Gives bot invite link`,
       usage: `Invite`,
-      aliases: [``]
+      aliases: []
     });
   }
 

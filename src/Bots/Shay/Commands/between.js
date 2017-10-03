@@ -11,7 +11,7 @@ class Command extends Commands {
       name: parse(__filename).base.replace(`.js`, ``),
       description: `Random number between min and max`,
       usage: `Between [Min] [Max]`,
-      aliases: [``]
+      aliases: []
     });
   }
 

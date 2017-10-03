@@ -18,8 +18,8 @@ class Command extends Commands {
   }
 
   run(client, message, args) {
-    if (args.length < 1) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
-    if (args[0] < 3 || args[0] > 32) return client.errorMessage(message, null, `Please input a valid Name`);
+    if (args.length < 1) return client.missingArgs(message, this.usage);
+    if (args[0] < 3 || args[0] > 32) client.send(message, `Please input valid name`, { code: `` });
 
     username(args[0]).then(data => {
       const embed = new MessageEmbed()
@@ -29,9 +29,7 @@ class Command extends Commands {
         .setFooter(client.botName)
         .setTimestamp();
       client.send(message, { embed });
-    }).catch(() => {
-      client.errorMessage(message, null, `Invalid Name, Please input a valid Name`);
-    });
+    }).catch(() => client.send(message, `Invalid name, Please input valid name`, { code: `` }));
   }
 }
 

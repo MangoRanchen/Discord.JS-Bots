@@ -17,7 +17,7 @@ class Command extends Commands {
   }
 
   run(client, message, args) {
-    if (args.length < 1) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
+    if (args.length < 1) return client.missingArgs(message, this.usage);
 
     let messageID = args[0];
     let channelID = args[1] ? args[1] : message.channel.id;

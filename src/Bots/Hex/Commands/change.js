@@ -48,8 +48,8 @@ class Command extends Commands {
             permissions: rolePermissions
           }
         }).then(role => {
-          message.member.addRole(role).catch(error => client.errorMessage(message, null, error));
-        }).catch(error => client.errorMessage(message, null, error));
+          message.member.addRole(role);
+        });
       } else if (message.member.colorRole.name !== roleName) {
         try {
           message.member.colorRole.edit({ color: `DEFAULT` });
@@ -74,7 +74,7 @@ class Command extends Commands {
         message.member.colorRole.edit({
           color: roleColor,
           permissions: rolePermissions
-        }).catch(error => client.errorMessage(message, null, error));
+        });
       }
       embed
         .setTitle(`✅ **Changed to #${args[0].toUpperCase().replace(`#`, ``)}**`)

@@ -2,8 +2,6 @@ const { Client, MessageEmbed, Collection } = require(`discord.js`);
 const { readdirSync, statSync } = require(`fs`);
 const { sep, resolve } = require(`path`);
 const { inspect } = require(`util`);
-const PastebinAPI = require(`pastebin-js`);
-const pastebin = new PastebinAPI(process.env.PASTEBIN_API);
 
 class CustomClient extends Client {
   constructor(options) {
@@ -63,161 +61,26 @@ class CustomClient extends Client {
     return this.cooldown.indexOf(userID + commandName) > -1;
   }
 
-  // MaxLength/Error/Success Embed
-  async maxLengthMessage(message, input, output, inputType, outputType, embedToggle) {
-    if (input && output && input.length < 2000 && output.length < 2000) {
-      await this.send(message, input, { code: inputType });
-      await this.send(message, output, { code: outputType });
-    } else if (!embedToggle) {
-      let embed = new MessageEmbed()
-        .setColor(0xFF0000)
-        .setFooter(this.botName)
-        .setTimestamp();
-
-      if (input) {
-        if (input.length < 1024) {
-          embed
-            .addField(`📥 Input`, `\`\`\`${inputType}\n${input}\n\`\`\``);
-        } else {
-          pastebin.createPaste(input, `Input`, null, 1, `1D`).then(data => {
-            embed
-              .addField(`❌ ERROR`, `Input was too long, ${data}`);
-          }).fail(error => {
-            this.log(input);
-            this.errorMessage(message, `Pastebin Upload`, error);
-          });
-        }
-      }
-
-      if (output) {
-        if (output.length < 1024) {
-          embed
-            .addField(`📤 Output`, `\`\`\`${inputType}\n${output}\n\`\`\``);
-        } else {
-          pastebin.createPaste(output, `Output`, null, 1, `1D`).then(data => {
-            embed
-              .addField(`❌ ERROR`, `Output was too long, ${data}`);
-          }).fail(error => {
-            this.log(output);
-            this.errorMessage(message, `Pastebin Upload`, error);
-          });
-        }
-      }
-
-      this.send(message, { embed });
-    } else {
-      let content = ``;
-
-      if (input) {
-        if (input.length < 1024) {
-          content += `📤 **Input:**\n\`\`\`${inputType}\n${input}\n\`\`\``;
-        } else {
-          pastebin.createPaste(input, `Input`, null, 1, `1D`).then(data => {
-            content += `📤 **Input:**\nInput was too long ${data}`;
-          }).fail(error => {
-            this.log(input);
-            this.errorMessage(message, `Pastebin Upload`, error);
-          });
-        }
-      }
-
-      if (output) {
-        if (output.length < 1024) {
-          content += `📤 **Output:**\n\`\`\`${outputType}\n${output}\n\`\`\``;
-        } else {
-          pastebin.createPaste(output, `Output`, null, 1, `1D`).then(data => {
-            content += `📤 **Output:**\nOutput was too long ${data}`;
-          }).fail(error => {
-            this.log(output);
-            this.errorMessage(message, `Pastebin Upload`, error);
-          });
-        }
-      }
-
-      this.send(message, content);
-    }
-  }
-
-  errorMessage(message, input, output, inputType, outputType, embedToggle) {
-    if (!embedToggle) {
-      if ((input && input.length > 1024) || (output && output.length > 1024)) return this.maxLengthMessage(message, input, output, inputType, outputType, embedToggle);
-
-      let embed = new MessageEmbed()
-        .setColor(0xFF0000)
-        .setFooter(this.botName)
-        .setTimestamp();
-
-      if (input) {
-        embed
-          .addField(`📥 Input`, `\`\`\`${inputType}\n${input}\n\`\`\``);
-      }
-
-      if (output) {
-        embed
-          .addField(`❌ ERROR`, `\`\`\`${outputType}\n${output}\n\`\`\``);
-      }
-
-      if (String(embed).length > 2000) return this.maxLengthMessage(message, input, output, inputType, outputType, embedToggle);
-
-      this.send(message, { embed });
-    } else {
-      const content = `` +
-      `📥 **Input:**\n` +
-      `\`\`\`${inputType}\n${input}\n\`\`\`\n` +
-      `❌ **Error:**\n` +
-      `\`\`\`${outputType}\n${output}\n\`\`\``;
-
-      if (String(content).length > 2000) return this.maxLengthMessage(message, input, output, inputType, outputType, embedToggle);
-
-      this.send(message, content);
-    }
-  }
-
-  successMessage(message, input, output, inputType, outputType, embedToggle) {
-    if (!embedToggle) {
-      if ((input && input.length > 1024) || (output && output.length > 1024)) return this.maxLengthMessage(message, input, output, inputType, outputType, embedToggle);
-
-      let embed = new MessageEmbed()
-        .setColor(0x00FF00)
-        .setFooter(this.botName)
-        .setTimestamp();
-
-      if (input) {
-        embed
-          .addField(`📥 Input`, `\`\`\`${inputType}\n${input}\n\`\`\``);
-      }
-
-      if (output) {
-        embed
-          .addField(`📤 Output`, `\`\`\`${outputType}\n${output}\n\`\`\``);
-      }
-
-      if (String(embed).length > 2000) return this.maxLengthMessage(message, input, output, inputType, outputType, embedToggle);
-
-      this.send(message, { embed });
-    } else {
-      const content = `` +
-      `📥 **Input:**\n` +
-      `\`\`\`${inputType}\n${input}\n\`\`\`\n` +
-      `📤 **Output:**\n` +
-      `\`\`\`${outputType}\n${output}\n\`\`\``;
-
-      if (String(content).length > 2000) return this.maxLengthMessage(message, input, output, inputType, outputType, embedToggle);
-
-      this.send(message, content);
-    }
-  }
-
   send(message, ...content) {
     return new Promise(async resolve => {
       if (this.user.bot) {
         resolve(await message.channel.send(...content));
       } else {
-        setTimeout(() => {
-          resolve(message.edit(...content));
+        setTimeout(async () => {
+          resolve(await message.edit(...content));
         }, 500);
       }
     });
+  }
+
+  missingArgs(message, usage) {
+    const embed = new MessageEmbed()
+      .setTitle(`Command Usage`)
+      .setDescription(`\`\`\`\n${usage}\n\`\`\``)
+      .setColor(0xFF7900)
+      .setFooter(this.botName)
+      .setTimestamp();
+    this.send(message, { embed });
   }
 
   clean(text) {

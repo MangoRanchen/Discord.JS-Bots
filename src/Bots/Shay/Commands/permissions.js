@@ -17,11 +17,11 @@ class Command extends Commands {
   }
 
   run(client, message, args) {
-    if (args.length < 1) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
+    if (args.length < 1) return client.missingArgs(message, this.usage);
 
     if (!message.guild.roles.find(`name`, args.join(` `))) return;
 
-    client.successMessage(message, `Permissions for ${args.join(` `)}`, client.clean(new Permissions(message.guild.roles.find(`name`, args.join(` `)).permissions).serialize()).toUpperCase().replace(/[{}, ]/g, ``));
+    client.send(message, client.clean(new Permissions(message.guild.roles.find(`name`, args.join(` `)).permissions).serialize()).toUpperCase().replace(/[{}, ]/g, ``), { code: `` });
   }
 }
 

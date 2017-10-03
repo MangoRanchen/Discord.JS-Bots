@@ -23,11 +23,9 @@ class Command extends Commands {
     function pickMember() {
       randomMember = message.guild.members.random();
 
-      if (randomMember !== null && !randomMember.user.bot) {
-        client.send(message, randomMember.user.username);
-      } else {
-        pickMember();
-      }
+      if (randomMember.user.bot) return pickMember();
+
+      client.send(message, randomMember.user.username);
     }
   }
 }

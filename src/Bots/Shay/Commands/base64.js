@@ -16,7 +16,7 @@ class Command extends Commands {
   }
 
   run(client, message, args) {
-    if (args.length < 2) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
+    if (args.length < 2) return client.missingArgs(message, this.usage);
 
     let action = args.shift();
     let output = null;
@@ -31,9 +31,7 @@ class Command extends Commands {
         break;
     }
 
-    if (output === null) return client.errorMessage(message, message.content, `Unknown function, encode or decode`);
-
-    client.successMessage(message, args.join(` `), output);
+    client.send(message, output, { code: `` });
   }
 }
 

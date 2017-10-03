@@ -1,5 +1,8 @@
 const Commands = require(`../Structures/Commands`);
+const { MessageEmbed } = require(`discord.js`);
 const { parse } = require(`path`);
+const PastebinAPI = require(`pastebin-js`);
+const pastebin = new PastebinAPI(process.env.PASTEBIN_API);
 
 class Command extends Commands {
   constructor(client) {
@@ -16,14 +19,54 @@ class Command extends Commands {
   }
 
   run(client, message, args) {
-    if (!client.ownerIDs.includes(message.author.id)) return client.errorMessage(message, null, `Sorry, you do not have permission for this command`);
-    if (args.length < 1) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
+    if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
+    if (args.length < 1) return client.missingArgs(message, this.usage);
+
+    let embed = new MessageEmbed()
+      .setFooter(client.botName)
+      .setTimestamp();
+
+    if (args.join(` `).length < 1024) {
+      embed.addField(`📥 Input`, `\`\`\`js\n${args.join(` `)}\n\`\`\``);
+    } else {
+      pastebin.createPaste(args.join(` `), `Input`, null, 1, `1D`).then(data => {
+        embed.addField(`❌ Error`, `Input was too long, ${data}`);
+      }).fail(error => {
+        this.error(error);
+        this.send(message, `Pastebin Upload`);
+      });
+    }
 
     try {
-      client.successMessage(message, args.join(` `), client.clean(eval(args.join(` `))), `js`, `js`, true);
+      const evaled = client.clean(eval(args.join(` `)));
+
+      embed.setColor(0x00FF00);
+
+      if (evaled.length < 1024) {
+        embed.addField(`📤 Output`, `\`\`\`js\n${evaled}\n\`\`\``);
+      } else {
+        pastebin.createPaste(args.join(` `), `Output`, null, 1, `1D`).then(data => {
+          embed.addField(`❌ Error`, `Output was too long, ${data}`);
+        }).fail(error => {
+          this.error(error);
+          this.send(message, `Pastebin Upload`);
+        });
+      }
     } catch (error) {
-      client.errorMessage(message, args.join(` `), error, `js`, null, true);
+      embed.setColor(0xFF0000);
+
+      if (String(error).length < 1024) {
+        embed.addField(`❌ Error`, `\`\`\`js\n${error}\n\`\`\``);
+      } else {
+        pastebin.createPaste(error, `Error`, null, 1, `1D`).then(data => {
+          embed.addField(`❌ Error`, `Error was too long, ${data}`);
+        }).fail(error => {
+          this.error(error);
+          this.send(message, `Pastebin Upload`);
+        });
+      }
     }
+    client.send(message, { embed });
   }
 }
 

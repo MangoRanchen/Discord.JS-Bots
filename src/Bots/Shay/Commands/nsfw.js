@@ -20,10 +20,10 @@ class Command extends Commands {
 
     if (message.member.roles.has(NSFW.id)) {
       message.member.removeRole(NSFW);
-      client.errorMessage(message, null, `Successfully Disabled NSFW Channels`);
+      client.send(message, `Successfully Disabled NSFW Channels`);
     } else {
       message.member.addRole(NSFW);
-      client.successMessage(message, null, `Successfully Enabled NSFW Channels`);
+      client.send(message, `Successfully Enabled NSFW Channels`);
     }
   }
 }

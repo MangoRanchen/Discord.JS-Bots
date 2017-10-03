@@ -16,12 +16,12 @@ class Command extends Commands {
   }
 
   run(client, message, args) {
-    if (!client.ownerIDs.includes(message.author.id)) return client.errorMessage(message, null, `Sorry, you do not have permission for this command`);
-    if (args.length < 1) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
+    if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
+    if (args.length < 1) return client.missingArgs(message, this.usage);
 
     client.guilds.get(args.join(` `)).channels.first().createInvite({ maxAge: 1 })
       .then(invite => client.send(message, invite.url))
-      .catch(error => client.errorMessage(message, null, error));
+      .catch(error => client.send(message, error, { code: `` }));
   }
 }
 

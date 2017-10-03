@@ -1,6 +1,9 @@
 const Commands = require(`../Structures/Commands`);
+const { MessageEmbed } = require(`discord.js`);
 const { exec } = require(`child_process`);
 const { parse } = require(`path`);
+const PastebinAPI = require(`pastebin-js`);
+const pastebin = new PastebinAPI(process.env.PASTEBIN_API);
 
 class Command extends Commands {
   constructor(client) {
@@ -17,14 +20,71 @@ class Command extends Commands {
   }
 
   run(client, message, args) {
-    if (!client.ownerIDs.includes(message.author.id)) return client.errorMessage(message, null, `Sorry, you do not have permission for this command`);
-    if (args.length < 1) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
+    if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
+    if (args.length < 1) return client.missingArgs(message, this.usage);
 
-    exec(args.join(` `), { cwd: `../../` }, (err, stdout, stderr) => {
-      if (err) return client.errorMessage(message, args.join(` `), err, `bash`, null, true);
-      if (stderr) return client.errorMessage(message, args.join(` `), stderr, `bash`, null, true);
+    let embed = new MessageEmbed()
+      .setFooter(client.botName)
+      .setTimestamp();
 
-      client.successMessage(message, args.join(` `), stdout, `bash`, null, true);
+    if (args.join(` `).length < 1024) {
+      embed.addField(`📥 Input`, `\`\`\`\n${args.join(` `)}\n\`\`\``);
+    } else {
+      pastebin.createPaste(args.join(` `), `Input`, null, 1, `1D`).then(data => {
+        embed.addField(`❌ Error`, `Input was too long, ${data}`);
+      }).fail(error => {
+        this.error(error);
+        this.send(message, `Pastebin Upload`);
+      });
+    }
+
+    exec(args.join(` `), { cwd: `../../` }, (error, stdout, stderr) => {
+      if (stderr) {
+        embed.setColor(0xFF0000);
+
+        if (stderr.length < 1024) {
+          embed.addField(`❌ Error`, `\`\`\`bash\n${stderr}\n\`\`\``);
+        } else {
+          pastebin.createPaste(stderr, `Error`, null, 1, `1D`).then(data => {
+            embed.addField(`❌ Error`, `Error was too long, ${data}`);
+          }).fail(error => {
+            this.error(error);
+            this.send(message, `Pastebin Upload`);
+          });
+        }
+        return client.send(message, { embed });
+      }
+
+      if (error) {
+        embed.setColor(0xFF0000);
+
+        if (String(error).length < 1024) {
+          embed.addField(`❌ Error`, `\`\`\`bash\n${error}\n\`\`\``);
+        } else {
+          pastebin.createPaste(error, `Error`, null, 1, `1D`).then(data => {
+            embed.addField(`❌ Error`, `Error was too long, ${data}`);
+          }).fail(error => {
+            this.error(error);
+            this.send(message, `Pastebin Upload`);
+          });
+        }
+        return client.send(message, { embed });
+      }
+
+      embed.setColor(0x00FF00);
+
+      if (stdout.length < 1024) {
+        embed.addField(`📤 Output`, `\`\`\`\bashn${stdout}\n\`\`\``);
+      } else {
+        pastebin.createPaste(stdout, `Output`, null, 1, `1D`).then(data => {
+          embed.addField(`❌ Error`, `Output was too long, ${data}`);
+        }).fail(error => {
+          this.error(error);
+          this.send(message, `Pastebin Upload`);
+        });
+      }
+
+      client.send(message, { embed });
     });
   }
 }

@@ -16,14 +16,14 @@ class Command extends Commands {
   }
 
   run(client, message) {
-    if (!client.ownerIDs.includes(message.author.id)) return client.errorMessage(message, null, `Sorry, you do not have permission for this command`);
+    if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
 
     let servers = [];
     client.guilds.forEach(guild => {
       servers.push(`${guild.name}\n`);
     });
 
-    client.successMessage(message, null, servers.sort().join(``));
+    client.send(message, servers.sort().join(``), { code: `` });
   }
 }
 

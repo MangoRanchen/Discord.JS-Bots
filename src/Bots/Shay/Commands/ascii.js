@@ -17,10 +17,10 @@ class Command extends Commands {
   }
 
   run(client, message, args) {
-    if (args.length < 1) return client.errorMessage(message, message.content.replace(client.botPrefix, ``), this.usage);
+    if (args.length < 1) return client.missingArgs(message, this.usage);
 
     asciify(args.join(` `), `standard`, (error, response) => {
-      if (error) return client.errorMessage(message, message.content, error);
+      if (error) return client.send(message, error, { code: `` });
 
       client.send(message, response, { code: `` });
     });

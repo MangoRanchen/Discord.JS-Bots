@@ -20,20 +20,20 @@ class Command extends Commands {
 			const commandNames = Array.from(client.commands.keys());
 			const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
 			const content =
-								`= Command List =\n` +
-								`\n` +
-								`[Use ${client.botPrefix}help <commandname> for details]\n` +
-								`\n` +
-								`${client.commands.map(c => c.show ? `${client.botPrefix}${c.name}${` `.repeat(longest - c.name.length)} :: ${c.description}\n` : null).join(``)}`;
+				`= Command List =\n` +
+				`\n` +
+				`[Use ${client.botPrefix}help <commandname> for details]\n` +
+				`\n` +
+				`${client.commands.map(c => c.show ? `${client.botPrefix}${c.name}${` `.repeat(longest - c.name.length)} :: ${c.description}\n` : null).join(``)}`;
 			client.send(message, content, { code: `asciidoc` });
 		} else {
 			let command = args[0];
 			if (client.commands.has(command)) {
 				command = client.commands.get(command);
 				const content =
-										`= ${command.name} = \n` +
-										`${command.description}\n` +
-										`usage::${command.usage}`;
+					`= ${command.name} = \n` +
+					`${command.description}\n` +
+					`usage::${command.usage}`;
 				client.send(message, content, { code: `asciidoc` });
 			}
 		}

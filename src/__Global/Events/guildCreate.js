@@ -10,7 +10,7 @@ class Event extends Events {
 			.setColor(0x00FF00)
 			.setFooter(`Joined`)
 			.setTimestamp();
-		client.send(client.channels.get(`363003869288202242`), { embed });
+		client.channels.get(`363003869288202242`).send({ embed });
 	}
 }
 

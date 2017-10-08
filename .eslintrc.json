@@ -1,5 +1,5 @@
 {
-  "extends": "aqua/2space",
+  "extends": "aqua",
   "rules": {
     "capitalized-comments": ["off"],
     "consistent-return": ["off"],

@@ -7,63 +7,63 @@ const { parse } = require(`path`);
 const getos = require(`getos`);
 
 class Command extends Commands {
-  constructor(client) {
-    super(client, {
-      enabled: true,
-      show: true,
-      cooldown: true,
-      cooldownTime: 30,
-      name: parse(__filename).base.replace(`.js`, ``),
-      description: `Shows bot & OS info`,
-      usage: `BotInfo`,
-      aliases: [`bot`]
-    });
-  }
+	constructor(client) {
+		super(client, {
+			enabled: true,
+			show: true,
+			cooldown: true,
+			cooldownTime: 30,
+			name: parse(__filename).base.replace(`.js`, ``),
+			description: `Shows bot & OS info`,
+			usage: `BotInfo`,
+			aliases: [`bot`]
+		});
+	}
 
-  run(client, message) {
-    if (!client.user.bot) message.delete({ timeout: 500 });
+	run(client, message) {
+		if (!client.user.bot) message.delete({ timeout: 500 });
 
-    message.channel.send(`Loading...`).then(sent => {
-      let memberCount = 0;
-      client.guilds.forEach(guild => {
-        memberCount += guild.memberCount;
-      });
+		message.channel.send(`Loading...`).then(sent => {
+			let memberCount = 0;
+			client.guilds.forEach(guild => {
+				memberCount += guild.memberCount;
+			});
 
-      getos((error, response) => {
-        if (error) return client.error(error);
+			getos((error, response) => {
+				if (error) return client.error(error);
 
-        exec(`npm -v`, async (error, stdout, stderr) => {
-          if (error) return client.error(error);
-          if (stderr) return client.error(stderr);
+				exec(`npm -v`, async (error, stdout, stderr) => {
+					if (error) return client.error(error);
+					if (stderr) return client.error(stderr);
 
-          const embed = new MessageEmbed()
-            .setAuthor(`GitHub Repo`, `https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png`)
-            .setTitle(homepage)
+					const embed = new MessageEmbed()
+						.setAuthor(`GitHub Repo`, `https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png`)
+						.setTitle(homepage)
 
-            .addField(`Node Version`, process.version, true)
-            .addField(`NPM Version`, stdout, true)
-            .addField(`Discord.JS Version`, version, true)
+						.addField(`Node Version`, process.version, true)
+						.addField(`NPM Version`, stdout, true)
+						.addField(`Discord.JS Version`, version, true)
 
-            .addField(`OS Type`, response.os.replace(`win32`, `Windows`).replace(`linux`, `Linux`), true)
-            .addField(`OS CPU`, `${await cpuLoad()}% used`, true)
-            .addField(`OS RAM`, process.env.LOCAL !== undefined ? `${await memoryUsage()}% used of 8GB` : `${await memoryUsage()}% used of 512MB`, true)
+						.addField(`OS Type`, response.os.replace(`win32`, `Windows`).replace(`linux`, `Linux`), true)
+						.addField(`OS CPU`, `${await cpuLoad()}% used`, true)
+						.addField(`OS RAM`, process.env.LOCAL !== undefined ? `${await memoryUsage()}% used of 8GB` : `${await memoryUsage()}% used of 512MB`, true)
 
-            .addField(`Heartbeat Ping`, `${Math.round(client.ping)}ms`, true)
-            .addField(`Message Ping`, `${Math.round(sent.createdTimestamp - message.createdTimestamp)}ms`, true)
-            .addField(`Process Uptime`, client.formatTime(process.uptime()), true)
+						.addField(`Heartbeat Ping`, `${Math.round(client.ping)}ms`, true)
+						.addField(`Message Ping`, `${Math.round(sent.createdTimestamp - message.createdTimestamp)}ms`, true)
+						.addField(`Process Uptime`, client.formatTime(process.uptime()), true)
 
-            .addField(`Guilds`, client.guilds.size, true)
-            .addField(`Channels`, client.formatNumbers(client.channels.size), true)
-            .addField(`Members`, client.formatNumbers(memberCount), true)
+						.addField(`Guilds`, client.guilds.size, true)
+						.addField(`Channels`, client.formatNumbers(client.channels.size), true)
+						.addField(`Members`, client.formatNumbers(memberCount), true)
 
-            .setColor(0x00FF00)
-            .setFooter(client.botName)
-            .setTimestamp();
-          sent.edit({ embed });
-        });
-      });
-    });
-  }
+						.setColor(0x00FF00)
+						.setFooter(client.botName)
+						.setTimestamp();
+					sent.edit({ embed });
+				});
+			});
+		});
+	}
 }
 
 module.exports = Command;

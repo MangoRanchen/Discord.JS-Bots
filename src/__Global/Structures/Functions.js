@@ -8,11 +8,35 @@ class CustomClient extends Client {
 		super(options);
 		[this.botName] = resolve(`.`).split(sep).slice(-1);
 		this.botPrefix = `${this.botName.toLowerCase().charAt(0)}!`;
-		this.commands = new Collection();
 		this.aliases = new Collection();
+		this.commands = new Collection();
 		this.cooldown = [];
 		this.ownerIDs = [`358558305997684739`];
+		this.databaseIDs = { DATABASE: `366665062179536896`, USED_API_CALLS: `366667065500631040` };
 	}
+
+	//
+	// Database
+	//
+	database(type) {
+		switch (type) {
+			case `add`: {
+				// Add
+				break;
+			}
+
+			case `remove`: {
+				// Remove
+				break;
+			}
+
+			case `check`: {
+				// Check
+				break;
+			}
+		}
+	}
+	// End Database
 
 	//
 	// Console (log|warn|error)
@@ -156,8 +180,11 @@ class CustomClient extends Client {
 	}
 
 	defaultChannel(guild) {
-		if (guild.systemChannel) return guild.systemChannel;
-		return guild.channels.find(channel => channel.permissionsFor(guild.me).has(`SEND_MESSAGES`));
+		guild.channels
+			.filter(c => c.type === `text` &&
+					c.permissionsFor(guild.me).has(`SEND_MESSAGES`))
+			.sort()
+			.first();
 	}
 	// End Misc
 }

@@ -1,7 +1,9 @@
 const { Client, MessageEmbed, Collection } = require(`discord.js`);
 const { readdirSync, statSync } = require(`fs`);
+const { } = require(`mongodb-core`);
 const { sep, resolve } = require(`path`);
 const { inspect } = require(`util`);
+const { } = require(`assert`);
 
 class CustomClient extends Client {
 	constructor(options) {
@@ -14,7 +16,18 @@ class CustomClient extends Client {
 		this.ownerIDs = [`358558305997684739`];
 	}
 
-	// Client Log/Warn/Error
+	//
+	// Console (log|warn|error)
+	//
+	console(input, type) {
+		const embed = new MessageEmbed()
+			.setDescription(input)
+			.setColor(0x00FF00)
+			.setFooter(`${type} | ${this.botName}`)
+			.setTimestamp();
+		this.channels.get(`361533828520476684`).send({ embed });
+	}
+
 	log(input) {
 		console.log(input);
 		if (process.env.LOCAL) return;
@@ -32,17 +45,14 @@ class CustomClient extends Client {
 		if (process.env.LOCAL) return;
 		this.console(input, `Error`);
 	}
+	// End Console
 
-	console(input, type) {
-		const embed = new MessageEmbed()
-			.setDescription(input)
-			.setColor(0x00FF00)
-			.setFooter(`${type} | ${this.botName}`)
-			.setTimestamp();
-		this.channels.get(`361533828520476684`).send({ embed });
+	// Cooldown (add|remove|check)
+	addCooldown(userID, commandName, time) {
+		this.cooldown.push(userID + commandName);
+		this.removeCooldown(userID, commandName, time);
 	}
 
-	// Add/Remove/Check Cooldown
 	removeCooldown(userID, commandName, time) {
 		let index = this.cooldown.indexOf(userID + commandName);
 		if (index > -1) {
@@ -52,15 +62,14 @@ class CustomClient extends Client {
 		}
 	}
 
-	addCooldown(userID, commandName, time) {
-		this.cooldown.push(userID + commandName);
-		this.removeCooldown(userID, commandName, time);
-	}
-
 	checkCooldown(userID, commandName) {
 		return this.cooldown.indexOf(userID + commandName) > -1;
 	}
+	// End Cooldown
 
+	//
+	// Misc (send|missingArgs|clean|formatTime|formatNumbers|defaultChannel)
+	//
 	send(message, ...content) {
 		return new Promise(async resolve => {
 			if (this.user.bot) {
@@ -152,6 +161,7 @@ class CustomClient extends Client {
 		if (guild.systemChannel) return guild.systemChannel;
 		return guild.channels.find(channel => channel.permissionsFor(guild.me).has(`SEND_MESSAGES`));
 	}
+	// End Misc
 }
 
 module.exports = CustomClient;

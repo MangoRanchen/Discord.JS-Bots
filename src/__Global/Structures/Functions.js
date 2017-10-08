@@ -1,9 +1,7 @@
 const { Client, MessageEmbed, Collection } = require(`discord.js`);
 const { readdirSync, statSync } = require(`fs`);
-const { } = require(`mongodb-core`);
 const { sep, resolve } = require(`path`);
 const { inspect } = require(`util`);
-const { } = require(`assert`);
 
 class CustomClient extends Client {
 	constructor(options) {

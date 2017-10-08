@@ -22,7 +22,7 @@ const client = new Client({
 		`GUILD_ROLE_UPDATE`,
 		// `GUILD_BAN_ADD`,
 		// `GUILD_BAN_REMOVE`,
-		`CHANNEL_CREATE`,
+		// `CHANNEL_CREATE`,
 		`CHANNEL_DELETE`,
 		`CHANNEL_UPDATE`,
 		`CHANNEL_PINS_UPDATE`,

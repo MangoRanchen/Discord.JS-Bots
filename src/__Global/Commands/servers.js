@@ -20,7 +20,7 @@ class Command extends Commands {
 
 		let servers = [];
 		client.guilds.forEach(guild => {
-			servers.push(`${guild.name}\n`);
+			servers.push(`${guild.name} (${guild.id})\n`);
 		});
 
 		client.send(message, servers.sort().join(``), { code: `` });

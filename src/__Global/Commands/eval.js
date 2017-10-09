@@ -18,7 +18,7 @@ class Command extends Commands {
 		});
 	}
 
-	run(client, message, args) {
+	async run(client, message, args) {
 		if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
 		if (args.length < 1) return client.missingArgs(message, this.usage);
 
@@ -38,7 +38,7 @@ class Command extends Commands {
 		}
 
 		try {
-			const evaled = client.clean(eval(args.join(` `)));
+			const evaled = await client.clean(eval(args.join(` `)));
 
 			embed.setColor(0x00FF00);
 

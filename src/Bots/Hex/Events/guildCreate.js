@@ -4,9 +4,9 @@ class Event extends Events {
 	async run(client, guild) {
 		client.log(`${client.botName} Has joined ${guild.name}`);
 
-		await guild.members.fetch();
-
 		if (guild.id === `110373943822540800`) return;
+
+		if (guild.memberCound < 200) await guild.members.fetch();
 
 		if (guild.roles.size > 200) {
 			return client.defaultChannel(guild).send(`This server has more than 200 roles, This bot will not work.`);

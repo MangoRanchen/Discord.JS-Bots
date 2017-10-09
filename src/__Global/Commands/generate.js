@@ -19,7 +19,7 @@ class Command extends Commands {
 		if (!client.ownerIDs.includes(message.author.id)) return client.send(message, `Sorry, you do not have permission for this command`);
 		if (args.length < 1) return client.missingArgs(message, this.usage);
 
-		client.guilds.get(args.join(` `)).channels.first().createInvite({ maxAge: 1 })
+		client.defaultChannel(client.guilds.find(`name`, args.join(` `))).createInvite({ maxAge: 1 })
 			.then(invite => client.send(message, invite.url))
 			.catch(error => client.send(message, error, { code: `` }));
 	}

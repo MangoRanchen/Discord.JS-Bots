@@ -6,7 +6,7 @@ const { inspect } = require(`util`);
 class CustomClient extends Client {
 	constructor(options) {
 		super(options);
-		[this.botName] = resolve(`.`).split(sep).slice(-1);
+		this.botName = resolve(`.`).split(sep).slice(-1).toString();
 		this.botPrefix = `${this.botName.toLowerCase().charAt(0)}!`;
 		this.aliases = new Collection();
 		this.commands = new Collection();
@@ -18,23 +18,14 @@ class CustomClient extends Client {
 	//
 	// Database
 	//
-	database(type) {
-		switch (type) {
-			case `add`: {
-				// Add
-				break;
-			}
+	dbEdit(dbName, VALUE) {
+		this.channels.get(this.databaseIDs.DATABASE).messages.fetch(this.databaseIDs[dbName]).then(m => m.edit(VALUE));
+	}
 
-			case `remove`: {
-				// Remove
-				break;
-			}
-
-			case `check`: {
-				// Check
-				break;
-			}
-		}
+	async dbCheck(dbName) {
+		let value = 0;
+		await this.channels.get(this.databaseIDs.DATABASE).messages.fetch(this.databaseIDs[dbName]).then(m => {	value = m.content; });
+		return value;
 	}
 	// End Database
 

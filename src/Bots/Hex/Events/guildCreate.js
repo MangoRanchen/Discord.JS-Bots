@@ -2,8 +2,6 @@ const Events = require(`../../../__Global/Structures/Events`);
 
 class Event extends Events {
 	async run(client, guild) {
-		client.log(`${client.botName} Has joined ${guild.name}`);
-
 		if (guild.id === `110373943822540800`) return;
 
 		if (guild.memberCound < 200) await guild.members.fetch();

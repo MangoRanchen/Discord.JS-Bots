@@ -12,28 +12,7 @@ class CustomClient extends Client {
 		this.commands = new Collection();
 		this.cooldown = [];
 		this.ownerIDs = [`358558305997684739`];
-		this.databaseIDs = { DATABASE: `366665062179536896`, USED_API_CALLS: `366667065500631040` };
 	}
-
-	//
-	// Database (dbEdit|dbCheck|dbAdd|dbSubtract)
-	//
-	dbEdit(dbName, VALUE) {
-		return this.channels.get(this.databaseIDs.DATABASE).messages.fetch(this.databaseIDs[dbName]).then(m => m.edit(VALUE));
-	}
-
-	dbCheck(dbName) {
-		return this.channels.get(this.databaseIDs.DATABASE).messages.fetch(this.databaseIDs[dbName]).then(m => m.content);
-	}
-
-	async dbAdd(dbName, int) {
-		return this.dbEdit(dbName, parseInt(await this.dbCheck(dbName)) + int);
-	}
-
-	async dbSubtract(dbName, int) {
-		return this.dbEdit(dbName, parseInt(await this.dbCheck(dbName)) + int);
-	}
-	// End Database
 
 	//
 	// Console (log|warn|error)

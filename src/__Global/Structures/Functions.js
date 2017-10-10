@@ -16,7 +16,7 @@ class CustomClient extends Client {
 	}
 
 	//
-	// Database
+	// Database (dbEdit|dbCheck|dbAdd|dbSubtract)
 	//
 	dbEdit(dbName, VALUE) {
 		return this.channels.get(this.databaseIDs.DATABASE).messages.fetch(this.databaseIDs[dbName]).then(m => m.edit(VALUE));
@@ -24,6 +24,14 @@ class CustomClient extends Client {
 
 	dbCheck(dbName) {
 		return this.channels.get(this.databaseIDs.DATABASE).messages.fetch(this.databaseIDs[dbName]).then(m => m.content);
+	}
+
+	async dbAdd(dbName, int) {
+		return this.dbEdit(dbName, await this.dbCheck(dbName) + int);
+	}
+
+	async dbSubtract(dbName, int) {
+		return this.dbEdit(dbName, await this.dbCheck(dbName) + int);
 	}
 	// End Database
 

@@ -27,11 +27,11 @@ class CustomClient extends Client {
 	}
 
 	async dbAdd(dbName, int) {
-		return this.dbEdit(dbName, await this.dbCheck(dbName) + int);
+		return this.dbEdit(dbName, parseInt(await this.dbCheck(dbName)) + int);
 	}
 
 	async dbSubtract(dbName, int) {
-		return this.dbEdit(dbName, await this.dbCheck(dbName) + int);
+		return this.dbEdit(dbName, parseInt(await this.dbCheck(dbName)) + int);
 	}
 	// End Database
 

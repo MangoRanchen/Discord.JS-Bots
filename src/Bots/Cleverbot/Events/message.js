@@ -15,6 +15,7 @@ class Event extends Events {
 			cleverbot.write(message.content, response => {
 				client.send(message, response.output);
 				message.channel.stopTyping();
+				client.dbAdd(`USED_API_CALLS`, 1);
 			});
 		}
 	}

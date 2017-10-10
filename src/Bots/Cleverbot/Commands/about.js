@@ -22,9 +22,9 @@ class Command extends Commands {
 			.setTitle(`About`)
 			.setDescription(
 				`I am Cleverbot\n` +
-								`I was created by **Shayne Hartford**\n` +
-								`To use me, create a channel with "cleverbot" in the name\n` +
-								`And start talking :D`
+				`I was created by **Shayne Hartford**\n` +
+				`To use me, create a channel with "cleverbot" in the name\n` +
+				`And start talking :D`
 			)
 			.setColor(0x00FF00)
 			.setFooter(client.botName)

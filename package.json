@@ -13,6 +13,7 @@
     "getos": "^3.0.1",
     "goo.gl": "^0.1.4",
     "mojang": "^0.4.1",
+    "mongodb": "^2.2.31",
     "os-toolbox": "^0.2.7",
     "pastebin-js": "^0.4.0",
     "randomcolor": "^0.5.3",

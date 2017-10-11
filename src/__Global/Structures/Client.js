@@ -1,4 +1,4 @@
-const { Database } = require(`./Database`);
+const Database = require(`./Database`);
 const { Client, MessageEmbed, Collection } = require(`discord.js`);
 const { readdirSync, statSync } = require(`fs`);
 const { sep, resolve } = require(`path`);

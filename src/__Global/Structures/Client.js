@@ -1,3 +1,4 @@
+const { Database } = require(`./Database`);
 const { Client, MessageEmbed, Collection } = require(`discord.js`);
 const { readdirSync, statSync } = require(`fs`);
 const { sep, resolve } = require(`path`);
@@ -10,6 +11,7 @@ class CustomClient extends Client {
 		this.botPrefix = `${this.botName.toLowerCase().charAt(0)}!`;
 		this.aliases = new Collection();
 		this.commands = new Collection();
+		this.database = new Database;
 		this.cooldown = [];
 		this.ownerIDs = [`358558305997684739`];
 	}

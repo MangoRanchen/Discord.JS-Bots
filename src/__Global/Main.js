@@ -1,4 +1,4 @@
-const Client = require(`../__Global/Structures/Functions`);
+const { Client } = require(`../__Global/Structures/Client`);
 const { join, resolve } = require(`path`);
 const { readdir } = require(`fs`);
 

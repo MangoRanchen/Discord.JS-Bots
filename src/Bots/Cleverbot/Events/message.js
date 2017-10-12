@@ -16,7 +16,7 @@ class Event extends Events {
 				client.send(message, response.output);
 				message.channel.stopTyping();
 				client.database.find({ USED_API_CALLS: { $type: 16 } }).then(data => {
-					client.database.update({ USED_API_CALLS: { $type: 16 } }, { USED_API_CALLS: data[0].USED_API_CALLS });
+					client.database.update({ USED_API_CALLS: { $type: 16 } }, { USED_API_CALLS: data[0].USED_API_CALLS + 1 });
 				});
 			});
 		}

@@ -6,68 +6,68 @@ class Database {
 	}
 
 	insert(objects) {
-		let value = null;
-		connect(this.url, (error, db) => {
-			if (error) return console.error(error);
-			console.log(`Connected successfully to server`);
+		return new Promise((resolve, reject) => {
+			connect(this.url, (error, db) => {
+				if (error) return reject(error);
+				console.log(`Connected successfully to server`);
 
-			var collection = db.collection(`documents`);
-			collection.insertMany(objects, (error, result) => {
-				if (error) return console.error(error);
-				console.log(`Inserted document(s) into the collection`);
-				value = result;
+				var collection = db.collection(`documents`);
+				collection.insertMany(objects, (error, result) => {
+					if (error) return reject(error);
+					console.log(`Inserted document(s) into the collection`);
+					resolve(result);
+				});
 			});
 		});
-		return value;
 	}
 
 	find(object) {
-		let value = null;
-		connect(this.url, (error, db) => {
-			if (error) return console.error(error);
-			console.log(`Connected successfully to server`);
+		return new Promise((resolve, reject) => {
+			connect(this.url, (error, db) => {
+				if (error) return reject(error);
+				console.log(`Connected successfully to server`);
 
-			var collection = db.collection(`documents`);
-			collection.find(object).toArray((error, docs) => {
-				if (error) return console.error(error);
-				console.log(`Found the following records`);
-				console.log(docs);
-				value = docs;
+				var collection = db.collection(`documents`);
+				collection.find(object).toArray((error, result) => {
+					if (error) return reject(error);
+					console.log(`Found the following records`);
+					console.log(result);
+					resolve(result);
+				});
 			});
 		});
-		return value;
 	}
 
 	update(object, object2) {
-		let value = null;
-		connect(this.url, (error, db) => {
-			if (error) return console.error(error);
-			console.log(`Connected successfully to server`);
+		return new Promise((resolve, reject) => {
+			connect(this.url, (error, db) => {
+				if (error) return reject(error);
+				console.log(`Connected successfully to server`);
 
-			var collection = db.collection(`documents`);
-			collection.updateOne(object, { $set: object2 }, (error, result) => {
-				if (error) return console.error(error);
-				console.log(`Updated the document with the field a equal to 2`);
-				value = result;
+				var collection = db.collection(`documents`);
+				collection.updateOne(object, { $set: object2 }, (error, result) => {
+					if (error) return reject(error);
+					console.log(`Updated the document`);
+					resolve(result);
+				});
 			});
 		});
-		return value;
 	}
 
 	remove(object) {
-		let value = null;
-		connect(this.url, (error, db) => {
-			if (error) return console.error(error);
-			console.log(`Connected successfully to server`);
+		return new Promise((resolve, reject) => {
+			connect(this.url, (error, db) => {
+				if (error) return reject(error);
+				console.log(`Connected successfully to server`);
 
-			var collection = db.collection(`documents`);
-			collection.deleteOne(object, (error, result) => {
-				if (error) return console.error(error);
-				console.log(`Removed the document with the field a equal to 3`);
-				value = result;
+				var collection = db.collection(`documents`);
+				collection.deleteOne(object, (error, result) => {
+					if (error) return reject(error);
+					console.log(`Removed the document with the field a equal to 3`);
+					resolve(result);
+				});
 			});
 		});
-		return value;
 	}
 }
 

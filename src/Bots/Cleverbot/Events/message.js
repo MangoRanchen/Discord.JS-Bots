@@ -15,6 +15,9 @@ class Event extends Events {
 			cleverbot.write(message.content, response => {
 				client.send(message, response.output);
 				message.channel.stopTyping();
+				client.database.find({ USED_API_CALLS: { $type: 16 } }).then(data => {
+					client.database.update({ USED_API_CALLS: { $type: 16 } }, { USED_API_CALLS: data[0].USED_API_CALLS });
+				});
 			});
 		}
 	}

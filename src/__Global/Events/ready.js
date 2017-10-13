@@ -5,7 +5,7 @@ class Event extends Events {
 		console.log(client.user.username);
 
 		if (client.user.bot) {
-			client.user.setActivity(`${client.botPrefix}help | ${client.guilds.size} Guilds | By Shayne Hartford (ShayBox)`);
+			client.user.setActivity(`${client.botPrefix}help | ${client.guilds.size} ${client.guilds.size > 1 ? `Guilds` : `Guild`} | By Shayne Hartford (ShayBox)`);
 		}
 	}
 }
